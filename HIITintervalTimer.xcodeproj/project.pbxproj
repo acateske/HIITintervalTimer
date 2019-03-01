@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C1175B4221DFA5100D81388 /* BebasNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */; };
+		6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */; };
 		6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */; };
-		6CB6BCBF221C7B6900C6EE34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBE221C7B6900C6EE34 /* ViewController.swift */; };
+		6CB6BCBF221C7B6900C6EE34 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBE221C7B6900C6EE34 /* InitialViewController.swift */; };
 		6CB6BCC2221C7B6900C6EE34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6BCC0221C7B6900C6EE34 /* Main.storyboard */; };
 		6CB6BCC4221C7B6A00C6EE34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */; };
 		6CB6BCC7221C7B6A00C6EE34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */; };
+		6CB6BCCF221C80DB00C6EE34 /* UIFont+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */; };
+		6CEEAA6B221C88760025978C /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6BCD0221C818600C6EE34 /* BebasNeue-Regular.ttf */; };
+		6CEEAA6D221C8D0F0025978C /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Bold.ttf"; sourceTree = "<group>"; };
+		6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionViewController.swift; sourceTree = "<group>"; };
 		6CB6BCB9221C7B6900C6EE34 /* HIITintervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITintervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6CB6BCBE221C7B6900C6EE34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6CB6BCBE221C7B6900C6EE34 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		6CB6BCC1221C7B6900C6EE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CB6BCC6221C7B6A00C6EE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CB6BCC8221C7B6A00C6EE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Additions.swift"; path = "HIITintervalTimer/SupportingFiles/UIFont+Additions.swift"; sourceTree = SOURCE_ROOT; };
+		6CB6BCD0221C818600C6EE34 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
+		6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Additions.swift"; path = "HIITintervalTimer/SupportingFiles/UIColor+Additions.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +45,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C1091E52223415900273BA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6BCBE221C7B6900C6EE34 /* InitialViewController.swift */,
+				6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6C1091E62223417100273BA3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CB6BCC0221C7B6900C6EE34 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C1091E72223417D00273BA3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6C1091E82223419400273BA3 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */,
+				6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */,
+				6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */,
+				6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */,
+				6CB6BCD0221C818600C6EE34 /* BebasNeue-Regular.ttf */,
+				6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		6CB6BCB0221C7B6900C6EE34 = {
 			isa = PBXGroup;
 			children = (
@@ -55,10 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */,
-				6CB6BCBE221C7B6900C6EE34 /* ViewController.swift */,
-				6CB6BCC0221C7B6900C6EE34 /* Main.storyboard */,
-				6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */,
-				6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */,
+				6C1091E52223415900273BA3 /* Controllers */,
+				6C1091E62223417100273BA3 /* View */,
+				6C1091E72223417D00273BA3 /* Model */,
+				6C1091E82223419400273BA3 /* SupportingFiles */,
 				6CB6BCC8221C7B6A00C6EE34 /* Info.plist */,
 			);
 			path = HIITintervalTimer;
@@ -122,6 +169,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C1175B4221DFA5100D81388 /* BebasNeue-Bold.ttf in Resources */,
+				6CEEAA6B221C88760025978C /* BebasNeue-Regular.ttf in Resources */,
 				6CB6BCC7221C7B6A00C6EE34 /* LaunchScreen.storyboard in Resources */,
 				6CB6BCC4221C7B6A00C6EE34 /* Assets.xcassets in Resources */,
 				6CB6BCC2221C7B6900C6EE34 /* Main.storyboard in Resources */,
@@ -135,7 +184,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CB6BCBF221C7B6900C6EE34 /* ViewController.swift in Sources */,
+				6CB6BCBF221C7B6900C6EE34 /* InitialViewController.swift in Sources */,
+				6CEEAA6D221C8D0F0025978C /* UIColor+Additions.swift in Sources */,
+				6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */,
+				6CB6BCCF221C80DB00C6EE34 /* UIFont+Additions.swift in Sources */,
 				6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
