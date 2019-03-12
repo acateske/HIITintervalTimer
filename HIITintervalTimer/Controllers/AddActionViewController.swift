@@ -10,12 +10,19 @@ import UIKit
 
 class AddActionViewController: UIViewController {
 
-    
     //MARK: - Set up propeties
     
     var numberOfRounds = 0
-    var actionSeconds = 0
-    var restSeconds = 0
+    var numberOfActionSeconds = 0
+    var numberOfRestSeconds = 0
+    var totalTime = 0
+    
+    @IBOutlet weak var trainingNameTextField: UITextField! {
+        didSet {
+            trainingNameTextField.textColor = UIColor.black
+            trainingNameTextField.font = UIFont.textStyle8
+        }
+    }
     
     @IBOutlet weak var restColorView: UIView! {
         didSet {
@@ -99,12 +106,13 @@ class AddActionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.black
         setUpNavigationBar()
+        trainingNameTextField.delegate = self
     }
     
-    //MARK:- Methods
+    //MARK:- Set up Methods
     
     func setUpNavigationBar() {
         
@@ -112,12 +120,41 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func saveBarButtonPressed(_ sender: UIBarButtonItem) {
+        
+        saveAction()
+        resetAction()
     }
     
     @IBAction func addActionButtonPressed(_ sender: Any) {
-        
-        print("\(numberOfRounds)")
+    
+        performSegue(withIdentifier: "goToListOfWorkoutsVC", sender: self)
     }
+    
+    func saveAction() {
+        
+        let workout = Workout()
+        
+        workout.nameOfTraining = trainingNameTextField.text ?? ""
+        workout.numberOfRounds = numberOfRounds
+        workout.actionSeconds = numberOfActionSeconds
+        workout.restSeconds = numberOfRestSeconds
+        workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
+        workoutTrainings.append(workout)
+    }
+    
+    func resetAction() {
+        
+        numberOfRounds = 0
+        numberOfRestSeconds = 0
+        numberOfActionSeconds = 0
+        totalTime = 0
+        
+        trainingNameTextField.text = ""
+        labelForRounds.text = "0 ROUNDS"
+        actionLabel.text = "0 SECONDS"
+        restLabel.text = "0 SECONDS"
+    }
+   
     
     @IBAction func addButtonRounds(_ sender: Any) {
         
@@ -135,28 +172,42 @@ class AddActionViewController: UIViewController {
     
     @IBAction func addActionSecondsBtn(_ sender: Any) {
         
-        actionSeconds += 10
-        actionLabel.text = "\(actionSeconds) SECONDS"
+        numberOfActionSeconds += 10
+        actionLabel.text = "\(numberOfActionSeconds) SECONDS"
     }
     @IBAction func reduceActionSecondsBtn(_ sender: Any) {
         
-        if actionSeconds > 0 {
-            actionSeconds -= 10
-            actionLabel.text = "\(actionSeconds) SECONDS"
+        if numberOfActionSeconds > 0 {
+            numberOfActionSeconds -= 10
+            actionLabel.text = "\(numberOfActionSeconds) SECONDS"
         }
     }
     @IBAction func addRestSecondsBtn(_ sender: Any) {
         
-        restSeconds += 10
-        restLabel.text = "\(restSeconds) SECONDS"
+        numberOfRestSeconds += 10
+        restLabel.text = "\(numberOfRestSeconds) SECONDS"
         
     }
     
     @IBAction func reduceRestSecondsBtn(_ sender: Any) {
         
-        if restSeconds > 0 {
-            restSeconds -= 10
-            restLabel.text = "\(restSeconds) SECONDS"
+        if numberOfRestSeconds > 0 {
+            numberOfRestSeconds -= 10
+            restLabel.text = "\(numberOfRestSeconds) SECONDS"
         }
     }
+}
+
+extension AddActionViewController: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        trainingNameTextField.resignFirstResponder()
+        return true
+    }
+    
 }

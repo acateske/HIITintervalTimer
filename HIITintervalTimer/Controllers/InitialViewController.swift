@@ -14,6 +14,7 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var addWorkOutButton: UIButton! {
         didSet {
+            
             addWorkOutButton.setTitle("ADD WORKOUT", for: .normal)
             addWorkOutButton.tintColor = UIColor.black
             addWorkOutButton.titleLabel?.font = UIFont.textStyle9
@@ -21,6 +22,7 @@ class InitialViewController: UIViewController {
     }
     @IBOutlet weak var label: UILabel! {
         didSet {
+            
             label.text = "NO WORKOUTS ADDED"
             label.font = UIFont.textStyle4
             label.textColor = UIColor.brownishGrey
@@ -29,14 +31,13 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         view.backgroundColor = .black
         setUpNavigationBar()
         
     }
     
-    //MARK: - Methods
+    //MARK: - Set up Methods
     
     func setUpNavigationBar() {
         
@@ -46,12 +47,10 @@ class InitialViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.textStyle, NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
-    
     @IBAction func addWorkOutButtonPressed(_ sender: Any) {
 
         performSegue(withIdentifier: "goToAddActionVC", sender: self)
     }
-    
     
 }
 
