@@ -380,6 +380,7 @@
                                                     <state key="normal" backgroundImage="pencil1"/>
                                                     <connections>
                                                         <action selector="editTrainingButton:" destination="dE6-0T-O9O" eventType="touchUpInside" id="Oq1-Ly-EbR"/>
+                                                        <segue destination="7jo-Q4-occ" kind="unwind" unwindAction="unwindToAddActionVCWithSegue:" id="Atc-bf-YT8"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjK-YX-L0H">
@@ -444,6 +445,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQI-FT-21g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7jo-Q4-occ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2712.8000000000002" y="132.68365817091455"/>
         </scene>

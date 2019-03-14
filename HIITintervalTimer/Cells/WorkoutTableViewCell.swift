@@ -8,13 +8,18 @@
 
 import UIKit
 
-protocol CustomCellDelegate {
+protocol CustomDeleteDelegate {
     func deleteButtonPressed(cell: WorkoutTableViewCell)
+}
+
+protocol CustomEditDelegate {
+    func editButtonPressed(cell: WorkoutTableViewCell)
 }
 
 class WorkoutTableViewCell: UITableViewCell {
     
-    var delegate: CustomCellDelegate?
+    var deleteDelegate: CustomDeleteDelegate?
+    var editDelegate:CustomEditDelegate?
     
     
     @IBOutlet weak var trainingNameLabel: UILabel! {
@@ -32,12 +37,13 @@ class WorkoutTableViewCell: UITableViewCell {
     }
     
     @IBAction func editTrainingButton(_ sender: Any) {
-
+        
+        editDelegate?.editButtonPressed(cell: self)
     }
     
     @IBAction func deleteTrainingButton(_ sender: Any) {
         
-        delegate?.deleteButtonPressed(cell: self)
+        deleteDelegate?.deleteButtonPressed(cell: self)
         
     }
 }

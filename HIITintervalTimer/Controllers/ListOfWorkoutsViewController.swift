@@ -12,10 +12,13 @@ class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Set up properties
     
+    var selectedRow: Int?
+    
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
         didSet {
             doneBarButton.title = "DONE"
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
+            doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
         }
     }
     @IBOutlet weak var tableView: UITableView! {
@@ -31,7 +34,6 @@ class ListOfWorkoutsViewController: UIViewController {
     
     @IBOutlet weak var addWorkoutButton: UIButton! {
         didSet {
-            
             addWorkoutButton.isEnabled = false
             addWorkoutButton.isOpaque = true
             addWorkoutButton.setTitle("ADD WORKOUT", for: .normal)
@@ -70,7 +72,8 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
         cell.backgroundColor = UIColor.black
         cell.selectionStyle = .none
         cell.trainingNameLabel.text = workoutTrainings[indexPath.row].nameOfTraining
-        cell.delegate = self
+        cell.deleteDelegate = self
+        cell.editDelegate = self
         
         let timeInterval = workoutTrainings[indexPath.row].totalTime
         let seconds = lroundf(Float(timeInterval))
@@ -86,15 +89,25 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     
 }
 
-//MARK:- Set up Protocol Method
+//MARK:- Set up Protocol Methods
 
-extension ListOfWorkoutsViewController: CustomCellDelegate {
+extension ListOfWorkoutsViewController: CustomDeleteDelegate {
     
     func deleteButtonPressed(cell: WorkoutTableViewCell) {
 
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         workoutTrainings.remove(at: index)
         tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+    }
+    
+}
+
+extension ListOfWorkoutsViewController: CustomEditDelegate {
+    
+    func editButtonPressed(cell: WorkoutTableViewCell) {
+        
+        guard let index = tableView.indexPath(for: cell)?.row else {return}
+        selectedRow = index       
     }
     
 }

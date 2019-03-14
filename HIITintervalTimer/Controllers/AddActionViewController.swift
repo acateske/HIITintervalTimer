@@ -93,9 +93,10 @@ class AddActionViewController: UIViewController {
         didSet {
             saveBarButton.title = "SAVE"
             saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
+            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5, NSAttributedString.Key.foregroundColor: UIColor.white], for: .highlighted)
         }
     }
-    
+        
     @IBOutlet weak var addActionButton: UIButton! {
         didSet {
             addActionButton.setTitle("ADD ACTION", for: .normal)
@@ -196,7 +197,31 @@ class AddActionViewController: UIViewController {
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
         }
     }
+    
+    //MARK:- Set up Unwind Seque Method
+    
+    @IBAction func unwindToAddActionVC(segue: UIStoryboardSegue) {
+        
+        if let listOfWorkoutsVC = segue.source as? ListOfWorkoutsViewController {
+            if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
+                
+                let workout: Workout = workoutTrainings[recivedSelectedRow]
+                
+                numberOfRounds = workout.numberOfRounds
+                labelForRounds.text = "\(numberOfRounds) ROUNDS"
+                
+//                trainingNameTextField.text = workoutTrainings[recivedSelectedRow].nameOfTraining
+//                labelForRounds.text = "\(workoutTrainings[recivedSelectedRow].numberOfRounds) ROUNDS"
+//                actionLabel.text = "\(workoutTrainings[recivedSelectedRow].actionSeconds) SECONDS"
+//                restLabel.text = "\(workoutTrainings[recivedSelectedRow].restSeconds) SECONDS"
+//
+//                workoutTrainings.remove(at: recivedSelectedRow)
+            }
+        }
+    }
 }
+
+//MARK:- Set up TextFieldDelegate Method
 
 extension AddActionViewController: UITextFieldDelegate {
     

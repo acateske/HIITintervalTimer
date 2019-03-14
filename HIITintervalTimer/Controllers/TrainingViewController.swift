@@ -10,6 +10,9 @@ import UIKit
 
 class TrainingViewController: UIViewController {
 
+    
+    //MARK:- Set up properties
+    
     @IBOutlet weak var totalTimeLabel: UILabel! {
         didSet {
             totalTimeLabel.textAlignment = .center
