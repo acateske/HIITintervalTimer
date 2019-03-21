@@ -93,7 +93,7 @@ class AddActionViewController: UIViewController {
         didSet {
             saveBarButton.title = "SAVE"
             saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
-            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5, NSAttributedString.Key.foregroundColor: UIColor.white], for: .highlighted)
+            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
         }
     }
         
@@ -122,8 +122,10 @@ class AddActionViewController: UIViewController {
     
     @IBAction func saveBarButtonPressed(_ sender: UIBarButtonItem) {
         
-        saveAction()
-        resetAction()
+        if trainingNameTextField.text != "" {
+            saveAction()
+            resetAction()
+        }
     }
     
     @IBAction func addActionButtonPressed(_ sender: Any) {
@@ -173,19 +175,19 @@ class AddActionViewController: UIViewController {
     
     @IBAction func addActionSecondsBtn(_ sender: Any) {
         
-        numberOfActionSeconds += 10
+        numberOfActionSeconds += 1
         actionLabel.text = "\(numberOfActionSeconds) SECONDS"
     }
     @IBAction func reduceActionSecondsBtn(_ sender: Any) {
         
         if numberOfActionSeconds > 0 {
-            numberOfActionSeconds -= 10
+            numberOfActionSeconds -= 1
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
         }
     }
     @IBAction func addRestSecondsBtn(_ sender: Any) {
         
-        numberOfRestSeconds += 10
+        numberOfRestSeconds += 1
         restLabel.text = "\(numberOfRestSeconds) SECONDS"
         
     }
@@ -193,7 +195,7 @@ class AddActionViewController: UIViewController {
     @IBAction func reduceRestSecondsBtn(_ sender: Any) {
         
         if numberOfRestSeconds > 0 {
-            numberOfRestSeconds -= 10
+            numberOfRestSeconds -= 1
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
         }
     }
@@ -205,17 +207,17 @@ class AddActionViewController: UIViewController {
         if let listOfWorkoutsVC = segue.source as? ListOfWorkoutsViewController {
             if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
                 
-                let workout: Workout = workoutTrainings[recivedSelectedRow]
+                let workout = workoutTrainings[recivedSelectedRow]
                 
                 numberOfRounds = workout.numberOfRounds
                 labelForRounds.text = "\(numberOfRounds) ROUNDS"
+                trainingNameTextField.text = workout.nameOfTraining
+                numberOfActionSeconds = workout.actionSeconds
+                actionLabel.text = "\(numberOfActionSeconds) SECONDS"
+                numberOfRestSeconds = workout.restSeconds
+                restLabel.text = "\(numberOfRestSeconds) SECONDS"
                 
-//                trainingNameTextField.text = workoutTrainings[recivedSelectedRow].nameOfTraining
-//                labelForRounds.text = "\(workoutTrainings[recivedSelectedRow].numberOfRounds) ROUNDS"
-//                actionLabel.text = "\(workoutTrainings[recivedSelectedRow].actionSeconds) SECONDS"
-//                restLabel.text = "\(workoutTrainings[recivedSelectedRow].restSeconds) SECONDS"
-//
-//                workoutTrainings.remove(at: recivedSelectedRow)
+                workoutTrainings.remove(at: recivedSelectedRow)
             }
         }
     }

@@ -118,5 +118,17 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        performSegue(withIdentifier: "gotoTrainingVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "gotoTrainingVC" {
+            if let trainingVC = segue.destination as? TrainingViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    trainingVC.selectedTraining = indexPath.row
+                }
+            }
+        }
     }
 }

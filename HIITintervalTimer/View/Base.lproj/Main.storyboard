@@ -412,7 +412,6 @@
                                         <connections>
                                             <outlet property="totalTimeLabel" destination="crK-B5-9Ve" id="3o3-j0-VS6"/>
                                             <outlet property="trainingNameLabel" destination="GHQ-aV-5S0" id="2EN-4G-LzA"/>
-                                            <segue destination="q1j-qS-DgY" kind="show" identifier="gotoTrainingVC" id="WZ1-Lz-tqy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -442,6 +441,7 @@
                         <outlet property="addWorkoutButton" destination="qqh-IU-YdK" id="N4c-qP-vKj"/>
                         <outlet property="doneBarButton" destination="UJr-Ii-o3X" id="QFL-6m-Pff"/>
                         <outlet property="tableView" destination="pvZ-gI-6nK" id="5zq-KU-Qow"/>
+                        <segue destination="q1j-qS-DgY" kind="show" identifier="gotoTrainingVC" id="XWW-Ns-Vsw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQI-FT-21g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -506,19 +506,44 @@
                                     <constraint firstAttribute="height" constant="99" id="2F4-JY-sKg"/>
                                     <constraint firstAttribute="width" constant="99" id="RqO-Mn-hNR"/>
                                 </constraints>
-                                <state key="normal" image="mediaPlaySymbol" backgroundImage="ellipse1"/>
+                                <state key="normal" backgroundImage="ellipse1"/>
+                                <connections>
+                                    <action selector="startWorkingPressed:" destination="q1j-qS-DgY" eventType="touchUpInside" id="3bV-sD-xUn"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYA-1p-tco">
+                                <rect key="frame" x="278" y="551" width="46" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="E7u-o9-1DG"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="endTimerPressed:" destination="q1j-qS-DgY" eventType="touchUpInside" id="fiv-33-36B"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3R-LU-jXf">
+                                <rect key="frame" x="119.5" y="137" width="38.5" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38.399999999999999" id="8Wg-lA-W1c"/>
+                                    <constraint firstAttribute="height" constant="38.399999999999999" id="B1C-97-mQJ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" name="black"/>
                         <constraints>
+                            <constraint firstItem="Bal-qO-uMe" firstAttribute="trailing" secondItem="hYA-1p-tco" secondAttribute="trailing" constant="51" id="1iG-k8-7Ms"/>
                             <constraint firstItem="vBz-cU-tVJ" firstAttribute="leading" secondItem="Bal-qO-uMe" secondAttribute="leading" constant="58" id="5fu-HT-8on"/>
                             <constraint firstItem="Jbd-Zz-xB7" firstAttribute="centerX" secondItem="8jl-bt-ief" secondAttribute="centerX" id="5ly-Zw-MCl"/>
                             <constraint firstItem="Jbd-Zz-xB7" firstAttribute="centerY" secondItem="8jl-bt-ief" secondAttribute="centerY" constant="-181.5" id="HZH-dH-cd9"/>
+                            <constraint firstItem="hYA-1p-tco" firstAttribute="leading" secondItem="e6S-6F-2vJ" secondAttribute="trailing" constant="41" id="K3T-Ep-5A6"/>
                             <constraint firstItem="5lQ-bN-zlv" firstAttribute="leading" secondItem="Bal-qO-uMe" secondAttribute="leading" constant="10" id="L2e-nu-UFW"/>
+                            <constraint firstItem="Jbd-Zz-xB7" firstAttribute="leading" secondItem="Y3R-LU-jXf" secondAttribute="trailing" constant="8.5" id="LVG-Ub-ng3"/>
                             <constraint firstItem="vBz-cU-tVJ" firstAttribute="top" secondItem="x41-LZ-eFn" secondAttribute="bottom" constant="51.899999999999999" id="LuB-s2-4AA"/>
                             <constraint firstItem="e6S-6F-2vJ" firstAttribute="centerX" secondItem="8jl-bt-ief" secondAttribute="centerX" id="O7S-xE-gqX"/>
                             <constraint firstItem="x41-LZ-eFn" firstAttribute="leading" secondItem="Bal-qO-uMe" secondAttribute="leading" constant="100" id="SRz-9z-cIK"/>
                             <constraint firstItem="r4k-c4-frt" firstAttribute="leading" secondItem="vBz-cU-tVJ" secondAttribute="trailing" constant="8" id="TEM-y5-dmp"/>
+                            <constraint firstItem="Bal-qO-uMe" firstAttribute="bottom" secondItem="hYA-1p-tco" secondAttribute="bottom" constant="85" id="TES-Ls-vzC"/>
+                            <constraint firstItem="5lQ-bN-zlv" firstAttribute="top" secondItem="Y3R-LU-jXf" secondAttribute="bottom" constant="5" id="UYx-VR-Rq8"/>
                             <constraint firstItem="e6S-6F-2vJ" firstAttribute="centerY" secondItem="8jl-bt-ief" secondAttribute="centerY" constant="234" id="ZEO-SI-oHW"/>
                             <constraint firstItem="Bal-qO-uMe" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="r4k-c4-frt" secondAttribute="trailing" constant="68" id="ZiA-eQ-4Ab"/>
                             <constraint firstItem="5lQ-bN-zlv" firstAttribute="top" secondItem="Jbd-Zz-xB7" secondAttribute="bottom" constant="3" id="c9n-jB-1wa"/>
@@ -530,11 +555,18 @@
                         <viewLayoutGuide key="safeArea" id="Bal-qO-uMe"/>
                     </view>
                     <navigationItem key="navigationItem" id="dgW-zw-CjV">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="menuButton1" id="5ah-P7-6PR"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="menuButton1" id="5ah-P7-6PR">
+                            <connections>
+                                <action selector="pomocZaSada:" destination="q1j-qS-DgY" id="IXL-zV-hc3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="clapImageView" destination="Y3R-LU-jXf" id="dbC-Ke-WFb"/>
+                        <outlet property="endTimerButton" destination="hYA-1p-tco" id="vok-yu-1Wd"/>
                         <outlet property="labelName" destination="Jbd-Zz-xB7" id="IBg-Rg-hbg"/>
                         <outlet property="numberOfRoundsLabel" destination="x41-LZ-eFn" id="5Oq-6C-55n"/>
+                        <outlet property="startWorkingButton" destination="e6S-6F-2vJ" id="DVg-27-0oz"/>
                         <outlet property="totalTimeLabel" destination="r4k-c4-frt" id="WT5-XJ-Odd"/>
                         <outlet property="workingTimeLabel" destination="5lQ-bN-zlv" id="9EZ-Bg-6nJ"/>
                     </connections>
@@ -565,7 +597,6 @@
     <resources>
         <image name="chronometer" width="21" height="22"/>
         <image name="ellipse1" width="99" height="99"/>
-        <image name="mediaPlaySymbol" width="29" height="40"/>
         <image name="menuButton1" width="28" height="22"/>
         <image name="pencil1" width="20" height="20"/>
         <image name="rectangle3" width="335" height="51"/>
