@@ -18,4 +18,5 @@ class Workout {
     
 }
 
+
 var workoutTrainings = [Workout]()
