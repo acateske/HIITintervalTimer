@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class InitialViewController: UIViewController {
 
@@ -34,6 +35,7 @@ class InitialViewController: UIViewController {
         
         view.backgroundColor = .black
         setUpNavigationBar()
+        SideMenuManager.default.menuFadeStatusBar = false
         
     }
     
@@ -43,6 +45,7 @@ class InitialViewController: UIViewController {
         
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.barStyle = .black
         title = "WORKOUTS"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.textStyle, NSAttributedString.Key.foregroundColor: UIColor.white]
     }

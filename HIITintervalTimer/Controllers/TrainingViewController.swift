@@ -118,9 +118,7 @@ class TrainingViewController: UIViewController {
         workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
     }
     
-    @IBAction func pomocZaSada(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
-    }
+    
     
     //MARK: Set up Timer Methods
     
