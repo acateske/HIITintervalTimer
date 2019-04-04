@@ -8,15 +8,9 @@
 
 import UIKit
 
-protocol CustomDeleteDelegate {
-    func deleteButtonPressed(cell: WorkoutTableViewCell)
-}
-
-protocol CustomEditDelegate {
-    func editButtonPressed(cell: WorkoutTableViewCell)
-}
-
 class WorkoutTableViewCell: UITableViewCell {
+    
+    //MARK:- Set up Properties
     
     var deleteDelegate: CustomDeleteDelegate?
     var editDelegate:CustomEditDelegate?
@@ -35,6 +29,8 @@ class WorkoutTableViewCell: UITableViewCell {
             totalTimeLabel.font = UIFont.textStyle6
         }
     }
+    
+    //MARK:- Set up Handlers
     
     @IBAction func editTrainingButton(_ sender: Any) {
         

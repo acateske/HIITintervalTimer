@@ -41,6 +41,9 @@ class ListOfWorkoutsViewController: UIViewController {
             addWorkoutButton.tintColor = UIColor.black
         }
     }
+    
+    //MARK:- Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +52,6 @@ class ListOfWorkoutsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
-    
     }
     
     func setUpNavigationBar() {
@@ -86,7 +88,6 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
         cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
         return cell
     }
-    
 }
 
 //MARK:- Set up Protocol Methods
@@ -99,7 +100,6 @@ extension ListOfWorkoutsViewController: CustomDeleteDelegate {
         workoutTrainings.remove(at: index)
         tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
     }
-    
 }
 
 extension ListOfWorkoutsViewController: CustomEditDelegate {
@@ -109,7 +109,6 @@ extension ListOfWorkoutsViewController: CustomEditDelegate {
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         selectedRow = index       
     }
-    
 }
 
 //MARK:- Set up Delegate Method

@@ -30,13 +30,14 @@ class InitialViewController: UIViewController {
         }
     }
     
+    //MARk:- Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .black
         setUpNavigationBar()
         SideMenuManager.default.menuFadeStatusBar = false
-        
     }
     
     //MARK: - Set up Methods

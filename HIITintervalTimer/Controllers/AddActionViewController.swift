@@ -105,6 +105,9 @@ class AddActionViewController: UIViewController {
         }
     }
     
+    
+    //MARK:- Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,7 +116,7 @@ class AddActionViewController: UIViewController {
         trainingNameTextField.delegate = self
     }
     
-    //MARK:- Set up Methods
+    //MARK:- Set up Handlers
     
     func setUpNavigationBar() {
         
