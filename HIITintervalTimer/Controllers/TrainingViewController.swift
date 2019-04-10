@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TrainingViewController: UIViewController {
     
-    //MARK:- Set up Timer properties
+    //MARK:- Set up properties
     
+    var player: AVAudioPlayer?
     var cool = false
     var round = 1
     var seconds = 0
     var timer = Timer()
-   // var isTimerRunning = false
-    var resumeTapped = false
-    
-    //MARK:- Set up properties
+    var timer2 = Timer()
+    var secForWormUp = 10
+    var wormUp = preparation
     
     var selectedTraining: Int?
     var numberOfRounds = 0
@@ -91,11 +92,22 @@ class TrainingViewController: UIViewController {
         
         view.backgroundColor = UIColor.black
         updateView()
+        
+         NotificationCenter.default.addObserver(self, selector: #selector(appResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+    
+    @objc func appResignActive() {
+        
+        if pauseOnIncommingCall {
+            timer.invalidate()
+            startWorkingButton.setImage(UIImage(named: "mediaPlaySymbol"), for: .normal)
+        }
     }
     
     func updateView() {
         
         guard let selectedTraining = selectedTraining else {return}
+        
         title = workoutTrainings[selectedTraining].nameOfTraining
         numberOfRounds = workoutTrainings[selectedTraining].numberOfRounds
         numberOfRoundsLabel.text = "ROUND 1/\(numberOfRounds)"
@@ -117,10 +129,64 @@ class TrainingViewController: UIViewController {
             workingTimeLabel.textColor = UIColor.white
             startWorkingButton.isEnabled = false
         }
-        workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
+        
+        if preparation {
+            workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(secForWormUp))
+            labelName.text = "Worm up"
+        } else {
+            workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
+        }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        timer2.invalidate()
+        timer.invalidate()
+    }
     
+    //MARK:- Set up AVAudio player
+    
+    let soundReady = "451270__alivvie__ready"
+    let soundRest = "108889__tim-kahn__rest"
+    let soundFinished = "34943__sir-yaro__finished"
+    
+    
+    func playSound(with sound: String, extensionn: String = "wav") {
+        
+        guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
+        do {
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+            guard let player = player else { return }
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+//    func playSoundRest() {
+//
+//        guard let url = Bundle.main.url(forResource: "108889__tim-kahn__rest", withExtension: "wav") else {return}
+//        do {
+//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+//            guard let player = player else {return}
+//            player.play()
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+//    }
+    
+//    func playSoundFinished() {
+//
+//        guard let url = Bundle.main.url(forResource: "34943__sir-yaro__finished", withExtension: "wav") else {return}
+//        do {
+//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+//            guard let player = player else {return}
+//            player.play()
+//        } catch let error {
+//            print(error.localizedDescription)
+//        }
+//    }
     
     //MARK: Set up Timer Methods
     
@@ -129,10 +195,31 @@ class TrainingViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func runTimer2() {
+        
+        timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerForPreparation), userInfo: nil, repeats: true)
+    }
+    
     @objc func updateTimer() {
         
         timerWorking()
         timerTotalTime()
+    }
+    
+    @objc func timerForPreparation() {
+        
+        if secForWormUp <= 1 {
+            wormUp = false
+            timer2.invalidate()
+            workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
+            playSound(with: soundReady)
+            runTimer()
+            startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
+            labelName.text = "Workout"
+        } else {
+            secForWormUp -= 1
+            workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(secForWormUp))
+        }
     }
     
     func timerWorking() {
@@ -147,6 +234,7 @@ class TrainingViewController: UIViewController {
                 round += 1
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
                 workingTimeLabel.textColor = UIColor.neonYellow
+                playSound(with: soundReady)
             } else if seconds > 1 {
                 seconds -= 1
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -161,6 +249,8 @@ class TrainingViewController: UIViewController {
                 labelName.text = "Finished"
                 labelName.textColor = UIColor.neonRed
                 workingTimeLabel.text = "00:00"
+                playSound(with: soundFinished)
+                startWorkingButton.isEnabled = false
             }
         } else {
             if seconds <= 1 && rest > 0{
@@ -169,6 +259,7 @@ class TrainingViewController: UIViewController {
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
                 workingTimeLabel.textColor = UIColor.neonRed
                 labelName.text = "Rest"
+                playSound(with: soundRest)
             } else if seconds <= 1 && rest == 0 && round != numberOfRounds {
                 seconds = action
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -200,12 +291,23 @@ class TrainingViewController: UIViewController {
     }
     
     @IBAction func startWorkingPressed(_ sender: UIButton) {
-        
-        if sender.currentImage == UIImage(named: "mediaPlaySymbol") {
+       
+        if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && !wormUp {
+            playSound(with: soundReady)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
-        } else if sender.currentImage == UIImage(named: "union1") {
+        } else if sender.currentImage == UIImage(named: "mediaPlaySymbol") && cool {
+            playSound(with: soundRest)
+            runTimer()
+            startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
+        } else if sender.currentImage == UIImage(named: "union1") && !wormUp  {
             timer.invalidate()
+            startWorkingButton.setImage(UIImage(named: "mediaPlaySymbol"), for: .normal)
+        } else if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && wormUp {
+            runTimer2()
+            startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
+        } else if sender.currentImage == UIImage(named: "union1") && !cool && wormUp {
+            timer2.invalidate()
             startWorkingButton.setImage(UIImage(named: "mediaPlaySymbol"), for: .normal)
         }
     }

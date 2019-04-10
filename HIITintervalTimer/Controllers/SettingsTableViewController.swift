@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class SettingsTableViewController: UITableViewController {
 
@@ -37,6 +38,7 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
          let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableViewCell
+        
         cell.delegate = self
         
         if indexPath.row == 0 {
@@ -90,6 +92,16 @@ class SettingsTableViewController: UITableViewController {
         cell.settingsButton.setBackgroundImage(UIImage(named: "rectangle68"), for: .normal)
         cell.settingsButton.setImage(UIImage(), for: .normal)
     }
+    
+    
+    //MARK: Rate The App
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                
+        if indexPath.row == settingsArray.count - 1 {
+            SKStoreReviewController.requestReview()
+        }
+    }
 }
 
 //MARK:- Set up Protocols
@@ -140,17 +152,17 @@ extension SettingsTableViewController: DidTapSettingsBtn {
             print("Nothing to show")
         }
     }
-    
+        
     func methodsActive(with cellTag: Int) {
         
         switch cellTag {
         case 0:
             UIApplication.shared.isIdleTimerDisabled = true
-            print("ole")
         case 1:
-            print("Pause on incoming calls")
+            pauseOnIncommingCall = true
         case 2:
             print("Preparation time 10 sec")
+            preparation = true
         case 3:
             print("Rate the app")
         default:
@@ -164,9 +176,10 @@ extension SettingsTableViewController: DidTapSettingsBtn {
         case 0:
             UIApplication.shared.isIdleTimerDisabled = false
         case 1:
-            print("Non Pause")
+            pauseOnIncommingCall = false
         case 2:
             print("Start now!")
+            preparation = false
         case 3:
             print("No rate")
         default:

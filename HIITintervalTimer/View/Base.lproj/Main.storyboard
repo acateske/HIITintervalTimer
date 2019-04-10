@@ -659,10 +659,10 @@
             </objects>
             <point key="canvasLocation" x="2712.8000000000002" y="944.97751124437787"/>
         </scene>
-        <!--Title-->
+        <!--Settings Table View Controller-->
         <scene sceneID="Zb1-7U-Mho">
             <objects>
-                <tableViewController id="5Nw-6S-NYF" customClass="SettingsTableViewController" customModule="HIITintervalTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5Nw-6S-NYF" customClass="SettingsTableViewController" customModule="HIITintervalTimer" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ahl-Nn-4nn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -715,7 +715,7 @@
                             <outlet property="delegate" destination="5Nw-6S-NYF" id="5ZW-aV-y1v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="PvM-5O-ads">
+                    <navigationItem key="navigationItem" id="PvM-5O-ads">
                         <barButtonItem key="backBarButtonItem" title="    " id="lKd-eZ-cBf"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" image="menuButton1" id="6e0-XF-L6M">
                             <connections>
@@ -791,7 +791,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="g76-1v-PS3"/>
-        <segue reference="sKw-UF-Z9w"/>
-        <segue reference="Kzv-AW-gQs"/>
+        <segue reference="Xlw-4n-IB6"/>
+        <segue reference="V85-8Z-cUw"/>
     </inferredMetricsTieBreakers>
 </document>

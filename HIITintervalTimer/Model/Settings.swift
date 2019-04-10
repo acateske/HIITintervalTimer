@@ -17,3 +17,5 @@ class Settings {
 }
 
 var settings = Settings()
+var pauseOnIncommingCall = false
+var preparation = false

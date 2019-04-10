@@ -18,6 +18,11 @@
 		6C905535224FE844003324CA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905534224FE844003324CA /* SettingsTableViewController.swift */; };
 		6C9288632254117A001463BE /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9288622254117A001463BE /* Protocols.swift */; };
 		6C9288652254138C001463BE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9288642254138C001463BE /* Settings.swift */; };
+		6C98F27722569AF200BE59F1 /* beep-29.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27622569AF200BE59F1 /* beep-29.wav */; };
+		6C98F27922569B0B00BE59F1 /* beep-30b.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27822569B0B00BE59F1 /* beep-30b.wav */; };
+		6C98F27B2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */; };
+		6C98F27D2256AFB100BE59F1 /* 451270__alivvie__ready.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */; };
+		6C98F27F2256B22F00BE59F1 /* 34943__sir-yaro__finished.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */; };
 		6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */; };
 		6CB6BCBF221C7B6900C6EE34 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBE221C7B6900C6EE34 /* InitialViewController.swift */; };
 		6CB6BCC2221C7B6900C6EE34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CB6BCC0221C7B6900C6EE34 /* Main.storyboard */; };
@@ -42,6 +47,11 @@
 		6C905534224FE844003324CA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		6C9288622254117A001463BE /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		6C9288642254138C001463BE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		6C98F27622569AF200BE59F1 /* beep-29.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-29.wav"; sourceTree = "<group>"; };
+		6C98F27822569B0B00BE59F1 /* beep-30b.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-30b.wav"; sourceTree = "<group>"; };
+		6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "108889__tim-kahn__rest.wav"; sourceTree = "<group>"; };
+		6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 451270__alivvie__ready.wav; sourceTree = "<group>"; };
+		6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "34943__sir-yaro__finished.wav"; sourceTree = "<group>"; };
 		6CB6BCB9221C7B6900C6EE34 /* HIITintervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITintervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CB6BCBE221C7B6900C6EE34 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +138,11 @@
 			isa = PBXGroup;
 			children = (
 				6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */,
+				6C98F27822569B0B00BE59F1 /* beep-30b.wav */,
+				6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */,
+				6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */,
+				6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */,
+				6C98F27622569AF200BE59F1 /* beep-29.wav */,
 				6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */,
 				6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */,
 				6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */,
@@ -240,8 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C1175B4221DFA5100D81388 /* BebasNeue-Bold.ttf in Resources */,
+				6C98F27722569AF200BE59F1 /* beep-29.wav in Resources */,
+				6C98F27F2256B22F00BE59F1 /* 34943__sir-yaro__finished.wav in Resources */,
 				6CEEAA6B221C88760025978C /* BebasNeue-Regular.ttf in Resources */,
+				6C98F27B2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav in Resources */,
 				6CB6BCC7221C7B6A00C6EE34 /* LaunchScreen.storyboard in Resources */,
+				6C98F27D2256AFB100BE59F1 /* 451270__alivvie__ready.wav in Resources */,
+				6C98F27922569B0B00BE59F1 /* beep-30b.wav in Resources */,
 				6CB6BCC4221C7B6A00C6EE34 /* Assets.xcassets in Resources */,
 				6CB6BCC2221C7B6900C6EE34 /* Main.storyboard in Resources */,
 			);
