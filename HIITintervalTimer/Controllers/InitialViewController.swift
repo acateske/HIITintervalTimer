@@ -15,7 +15,6 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var addWorkOutButton: UIButton! {
         didSet {
-            
             addWorkOutButton.setTitle("ADD WORKOUT", for: .normal)
             addWorkOutButton.tintColor = UIColor.black
             addWorkOutButton.titleLabel?.font = UIFont.textStyle9
@@ -23,7 +22,6 @@ class InitialViewController: UIViewController {
     }
     @IBOutlet weak var label: UILabel! {
         didSet {
-            
             label.text = "NO WORKOUTS ADDED"
             label.font = UIFont.textStyle4
             label.textColor = UIColor.brownishGrey

@@ -20,14 +20,13 @@ class TrainingViewController: UIViewController {
     var timer = Timer()
     var timer2 = Timer()
     var secForWormUp = 10
-    var wormUp = preparation
-    
+    //var wormUp = preparation
+    var wormUp = settings.wormUp
     var selectedTraining: Int?
     var numberOfRounds = 0
     var totalTime = 0.0
     var action = 0
     var rest = 0
-    
     
     @IBOutlet weak var totalTimeLabel: UILabel! {
         didSet {
@@ -63,7 +62,6 @@ class TrainingViewController: UIViewController {
     
     @IBOutlet weak var workingTimeLabel: UILabel! {
         didSet {
-           // workingTimeLabel.textColor = UIColor.white
             workingTimeLabel.textAlignment = .center
             workingTimeLabel.font = UIFont.textStyle10
             workingTimeLabel.text = "00:00"
@@ -98,8 +96,9 @@ class TrainingViewController: UIViewController {
     
     @objc func appResignActive() {
         
-        if pauseOnIncommingCall {
+        if settings.pauseOn {
             timer.invalidate()
+            timer2.invalidate()
             startWorkingButton.setImage(UIImage(named: "mediaPlaySymbol"), for: .normal)
         }
     }
@@ -116,24 +115,14 @@ class TrainingViewController: UIViewController {
         action = workoutTrainings[selectedTraining].actionSeconds
         rest = workoutTrainings[selectedTraining].restSeconds
         
-        if action > 0 && numberOfRounds != 0 {
+        if settings.wormUp {
             seconds = action
-            workingTimeLabel.textColor = UIColor.neonYellow
-        } else if action == 0 && numberOfRounds != 0 {
-            seconds = rest
-            cool = true
-            workingTimeLabel.textColor = UIColor.neonRed
-            labelName.text = "Rest"
-        } else if numberOfRounds == 0 {
-            seconds = 0
-            workingTimeLabel.textColor = UIColor.white
-            startWorkingButton.isEnabled = false
-        }
-        
-        if preparation {
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(secForWormUp))
             labelName.text = "Worm up"
+            workingTimeLabel.textColor = UIColor.white
         } else {
+            seconds = action
+            workingTimeLabel.textColor = UIColor.neonYellow
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
         }
     }
@@ -164,30 +153,6 @@ class TrainingViewController: UIViewController {
         }
     }
     
-//    func playSoundRest() {
-//
-//        guard let url = Bundle.main.url(forResource: "108889__tim-kahn__rest", withExtension: "wav") else {return}
-//        do {
-//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-//            guard let player = player else {return}
-//            player.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
-    
-//    func playSoundFinished() {
-//
-//        guard let url = Bundle.main.url(forResource: "34943__sir-yaro__finished", withExtension: "wav") else {return}
-//        do {
-//            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-//            guard let player = player else {return}
-//            player.play()
-//        } catch let error {
-//            print(error.localizedDescription)
-//        }
-//    }
-    
     //MARK: Set up Timer Methods
     
     func runTimer() {
@@ -215,6 +180,7 @@ class TrainingViewController: UIViewController {
             playSound(with: soundReady)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
+            workingTimeLabel.textColor = UIColor.neonYellow
             labelName.text = "Workout"
         } else {
             secForWormUp -= 1
@@ -331,6 +297,7 @@ class TrainingViewController: UIViewController {
         
         workingTimeLabel.textColor = UIColor.white
         timer.invalidate()
+        timer2.invalidate()
         seconds = 0
         workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
         totalTime = 0

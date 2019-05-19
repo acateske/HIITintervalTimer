@@ -13,10 +13,6 @@ class SettingsTableViewController: UITableViewController {
 
     //MARK:- Set up properties
     
-    var keepScreenOn: Bool = false
-    var pauseOn: Bool = false
-    var wormUp: Bool = false
-    
     var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "Rate the app"]
     
     override func viewDidLoad() {
@@ -93,7 +89,6 @@ class SettingsTableViewController: UITableViewController {
         cell.settingsButton.setImage(UIImage(), for: .normal)
     }
     
-    
     //MARK: Rate The App
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,76 +109,32 @@ extension SettingsTableViewController: DidTapSettingsBtn {
         
         if cellTag == 0 {
             if didCheckKeepScreenOn {
-                methodsActive(with: cellTag)
                 configureActiveSettingsBtn(with: cell)
-                keepScreenOn = didCheckKeepScreenOn
-                settings.keepScreenOn = keepScreenOn
+                settings.keepScreenOn = didCheckKeepScreenOn
+                UIApplication.shared.isIdleTimerDisabled = settings.keepScreenOn
             } else {
-                methodsInActive(with: cellTag)
                 configureInActiveSettingsBtn(with: cell)
-                keepScreenOn = didCheckKeepScreenOn
-                settings.keepScreenOn = keepScreenOn
+                settings.keepScreenOn = didCheckKeepScreenOn
+                UIApplication.shared.isIdleTimerDisabled = settings.keepScreenOn
             }
         } else if cellTag == 1 {
             if didCheckPauseOn {
-                methodsActive(with: cellTag)
                 configureActiveSettingsBtn(with: cell)
-                pauseOn = didCheckPauseOn
-                settings.pauseOn = pauseOn
+                settings.pauseOn = didCheckPauseOn
             } else {
-                methodsInActive(with: cellTag)
                 configureInActiveSettingsBtn(with: cell)
-                pauseOn = didCheckPauseOn
-                settings.pauseOn = pauseOn
+                settings.pauseOn = didCheckPauseOn
             }
         } else if cellTag == 2 {
             if didCheckWormUp {
-                methodsActive(with: cellTag)
                 configureActiveSettingsBtn(with: cell)
-                wormUp = didCheckWormUp
-                settings.wormUp = wormUp
+                settings.wormUp = didCheckWormUp
             } else {
-                methodsInActive(with: cellTag)
                 configureInActiveSettingsBtn(with: cell)
-                wormUp = didCheckWormUp
-                settings.wormUp = wormUp
+                settings.wormUp = didCheckWormUp
             }
         } else {
             print("Nothing to show")
-        }
-    }
-        
-    func methodsActive(with cellTag: Int) {
-        
-        switch cellTag {
-        case 0:
-            UIApplication.shared.isIdleTimerDisabled = true
-        case 1:
-            pauseOnIncommingCall = true
-        case 2:
-            print("Preparation time 10 sec")
-            preparation = true
-        case 3:
-            print("Rate the app")
-        default:
-            print("Something get wrong!")
-        }
-    }
-    
-    func methodsInActive(with cellTag: Int) {
-        
-        switch cellTag {
-        case 0:
-            UIApplication.shared.isIdleTimerDisabled = false
-        case 1:
-            pauseOnIncommingCall = false
-        case 2:
-            print("Start now!")
-            preparation = false
-        case 3:
-            print("No rate")
-        default:
-            print("get wrong!")
         }
     }
 }

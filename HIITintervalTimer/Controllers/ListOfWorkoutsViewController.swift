@@ -48,15 +48,10 @@ class ListOfWorkoutsViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.black
-        setUpNavigationBar()
+        title = "WORKOUTS"
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
-    }
-    
-    func setUpNavigationBar() {
-        
-        title = "WORKOUTS"
     }
 }
 
@@ -71,6 +66,7 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as! WorkoutTableViewCell
+        
         cell.backgroundColor = UIColor.black
         cell.selectionStyle = .none
         cell.trainingNameLabel.text = workoutTrainings[indexPath.row].nameOfTraining
@@ -122,11 +118,9 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "gotoTrainingVC" {
-            if let trainingVC = segue.destination as? TrainingViewController {
-                if let indexPath = tableView.indexPathForSelectedRow {
-                    trainingVC.selectedTraining = indexPath.row
-                }
+        if let trainingVC = segue.destination as? TrainingViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                trainingVC.selectedTraining = indexPath.row
             }
         }
     }

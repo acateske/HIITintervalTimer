@@ -40,6 +40,5 @@ class WorkoutTableViewCell: UITableViewCell {
     @IBAction func deleteTrainingButton(_ sender: Any) {
         
         deleteDelegate?.deleteButtonPressed(cell: self)
-        
     }
 }

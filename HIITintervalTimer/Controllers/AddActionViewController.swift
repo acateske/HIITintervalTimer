@@ -105,7 +105,6 @@ class AddActionViewController: UIViewController {
         }
     }
     
-    
     //MARK:- Init
     
     override func viewDidLoad() {
@@ -125,7 +124,7 @@ class AddActionViewController: UIViewController {
     
     @IBAction func saveBarButtonPressed(_ sender: UIBarButtonItem) {
         
-        if trainingNameTextField.text != "" {
+        if trainingNameTextField.text != "" && numberOfRounds != 0 && numberOfActionSeconds != 0 {
             saveAction()
             resetAction()
         }
@@ -140,7 +139,7 @@ class AddActionViewController: UIViewController {
         
         let workout = Workout()
         
-        workout.nameOfTraining = trainingNameTextField.text ?? ""
+        workout.nameOfTraining = trainingNameTextField.text!
         workout.numberOfRounds = numberOfRounds
         workout.actionSeconds = numberOfActionSeconds
         workout.restSeconds = numberOfRestSeconds
@@ -208,6 +207,7 @@ class AddActionViewController: UIViewController {
     @IBAction func unwindToAddActionVC(segue: UIStoryboardSegue) {
         
         if let listOfWorkoutsVC = segue.source as? ListOfWorkoutsViewController {
+            
             if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
                 
                 let workout = workoutTrainings[recivedSelectedRow]
