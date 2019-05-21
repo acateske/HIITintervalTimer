@@ -13,7 +13,8 @@ class SettingsTableViewCell: UITableViewCell {
     //MARK:- Set up Properties
     
     var delegate: DidTapSettingsBtn?
-    var didCheckKeepScreenOn: Bool = settings.keepScreenOn
+    
+    var didCheckKeepScreenOn = settings.keepScreenOn
     var didCheckPauseOn = settings.pauseOn
     var didCheckWormUp = settings.wormUp
     

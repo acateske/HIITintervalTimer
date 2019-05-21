@@ -7,13 +7,13 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Settings {
+class Settings: Object {
     
-    var keepScreenOn: Bool = false
-    var pauseOn: Bool = false
-    var wormUp: Bool = false
+    @objc dynamic var keepScreenOn: Bool = false
+    @objc dynamic var pauseOn: Bool = false
+    @objc dynamic var wormUp: Bool = false
 }
 
 var settings = Settings()
-

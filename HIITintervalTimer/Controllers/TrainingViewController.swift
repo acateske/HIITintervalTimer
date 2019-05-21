@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import RealmSwift
 
 class TrainingViewController: UIViewController {
     
@@ -20,7 +21,6 @@ class TrainingViewController: UIViewController {
     var timer = Timer()
     var timer2 = Timer()
     var secForWormUp = 10
-    //var wormUp = preparation
     var wormUp = settings.wormUp
     var selectedTraining: Int?
     var numberOfRounds = 0
@@ -96,6 +96,7 @@ class TrainingViewController: UIViewController {
     
     @objc func appResignActive() {
         
+//        guard let pauseOn = settings?.first?.pauseOn else {return}
         if settings.pauseOn {
             timer.invalidate()
             timer2.invalidate()
@@ -115,7 +116,8 @@ class TrainingViewController: UIViewController {
         action = workoutTrainings[selectedTraining].actionSeconds
         rest = workoutTrainings[selectedTraining].restSeconds
         
-        if settings.wormUp {
+//        guard let wormUp = settings?.first?.wormUp else {return}
+        if wormUp {
             seconds = action
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(secForWormUp))
             labelName.text = "Worm up"
@@ -258,6 +260,8 @@ class TrainingViewController: UIViewController {
     
     @IBAction func startWorkingPressed(_ sender: UIButton) {
        
+//        guard let wormUp = wormUp else {return}
+        
         if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && !wormUp {
             playSound(with: soundReady)
             runTimer()

@@ -8,10 +8,17 @@
 
 import UIKit
 import StoreKit
+import RealmSwift
 
 class SettingsTableViewController: UITableViewController {
 
     //MARK:- Set up properties
+    
+    let realm = try! Realm()
+
+//    var keepScreenOn = false
+//    var pauseOn = false
+//    var wormUp = false
     
     var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "Rate the app"]
     
@@ -23,6 +30,8 @@ class SettingsTableViewController: UITableViewController {
         
         title = "Settings"
         tableView.tableFooterView = UIView()
+        
+        load()
     }
 
     // MARK: - Table view data source
@@ -97,6 +106,19 @@ class SettingsTableViewController: UITableViewController {
             SKStoreReviewController.requestReview()
         }
     }
+    
+    //MARK:- Manipulating data
+    
+    func save() {
+        
+    }
+    
+    func load() {
+        
+        if let settingsData = realm.objects(Settings.self).first {
+            settings = settingsData
+        }
+    }
 }
 
 //MARK:- Set up Protocols
@@ -110,28 +132,66 @@ extension SettingsTableViewController: DidTapSettingsBtn {
         if cellTag == 0 {
             if didCheckKeepScreenOn {
                 configureActiveSettingsBtn(with: cell)
-                settings.keepScreenOn = didCheckKeepScreenOn
-                UIApplication.shared.isIdleTimerDisabled = settings.keepScreenOn
+                do {
+                    try realm.write {
+                        settings.keepScreenOn = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("Error", error.localizedDescription)
+                }
+                UIApplication.shared.isIdleTimerDisabled = didCheckKeepScreenOn
+               
             } else {
                 configureInActiveSettingsBtn(with: cell)
-                settings.keepScreenOn = didCheckKeepScreenOn
-                UIApplication.shared.isIdleTimerDisabled = settings.keepScreenOn
+                do {
+                    try realm.write {
+                        settings.keepScreenOn = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("error")
+                }
+                UIApplication.shared.isIdleTimerDisabled = didCheckKeepScreenOn
+                
             }
         } else if cellTag == 1 {
             if didCheckPauseOn {
                 configureActiveSettingsBtn(with: cell)
-                settings.pauseOn = didCheckPauseOn
+                do {
+                    try realm.write {
+                        settings.pauseOn = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("error")
+                }
             } else {
                 configureInActiveSettingsBtn(with: cell)
-                settings.pauseOn = didCheckPauseOn
+                do {
+                    try realm.write {
+                        settings.pauseOn = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("error")
+                }
             }
         } else if cellTag == 2 {
             if didCheckWormUp {
                 configureActiveSettingsBtn(with: cell)
-                settings.wormUp = didCheckWormUp
+                do {
+                    try realm.write {
+                        settings.wormUp = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("error")
+                }
             } else {
                 configureInActiveSettingsBtn(with: cell)
-                settings.wormUp = didCheckWormUp
+                do {
+                    try realm.write {
+                        settings.wormUp = didCheckKeepScreenOn
+                    }
+                } catch {
+                    print("error")
+                }
             }
         } else {
             print("Nothing to show")
