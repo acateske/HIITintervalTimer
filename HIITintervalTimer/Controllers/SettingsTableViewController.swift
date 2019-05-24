@@ -26,9 +26,9 @@ class SettingsTableViewController: UITableViewController {
         
         title = "Settings"
         tableView.tableFooterView = UIView()
-        
+        //Realm file path
      //   print(Realm.Configuration.defaultConfiguration.fileURL)
-        //Try to save data using Realm x3
+       
         load()
     }
     
