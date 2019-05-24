@@ -15,10 +15,6 @@ class SettingsTableViewController: UITableViewController {
     //MARK:- Set up properties
     
     let realm = try! Realm()
-
-//    var keepScreenOn = false
-//    var pauseOn = false
-//    var wormUp = false
     
     var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "Rate the app"]
     
@@ -31,9 +27,11 @@ class SettingsTableViewController: UITableViewController {
         title = "Settings"
         tableView.tableFooterView = UIView()
         
+     //   print(Realm.Configuration.defaultConfiguration.fileURL)
+        
         load()
     }
-
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,15 +107,21 @@ class SettingsTableViewController: UITableViewController {
     
     //MARK:- Manipulating data
     
-    func save() {
-        
-    }
-    
     func load() {
         
-        if let settingsData = realm.objects(Settings.self).first {
+        if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
             settings = settingsData
+        } else {
+            do {
+                try realm.write {
+                    settings.yourPrimaryKey = 0
+                    realm.add(settings, update: true)
+                }
+            } catch {
+                print("Error", error.localizedDescription)
+            }
         }
+        tableView.reloadData()
     }
 }
 
@@ -140,7 +144,6 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                     print("Error", error.localizedDescription)
                 }
                 UIApplication.shared.isIdleTimerDisabled = didCheckKeepScreenOn
-               
             } else {
                 configureInActiveSettingsBtn(with: cell)
                 do {
@@ -151,14 +154,13 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                     print("error")
                 }
                 UIApplication.shared.isIdleTimerDisabled = didCheckKeepScreenOn
-                
             }
         } else if cellTag == 1 {
             if didCheckPauseOn {
                 configureActiveSettingsBtn(with: cell)
                 do {
                     try realm.write {
-                        settings.pauseOn = didCheckKeepScreenOn
+                        settings.pauseOn = didCheckPauseOn
                     }
                 } catch {
                     print("error")
@@ -167,7 +169,7 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                 configureInActiveSettingsBtn(with: cell)
                 do {
                     try realm.write {
-                        settings.pauseOn = didCheckKeepScreenOn
+                        settings.pauseOn = didCheckPauseOn
                     }
                 } catch {
                     print("error")
@@ -178,7 +180,7 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                 configureActiveSettingsBtn(with: cell)
                 do {
                     try realm.write {
-                        settings.wormUp = didCheckKeepScreenOn
+                        settings.wormUp = didCheckWormUp
                     }
                 } catch {
                     print("error")
@@ -187,7 +189,7 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                 configureInActiveSettingsBtn(with: cell)
                 do {
                     try realm.write {
-                        settings.wormUp = didCheckKeepScreenOn
+                        settings.wormUp = didCheckWormUp
                     }
                 } catch {
                     print("error")

@@ -30,7 +30,7 @@ class SettingsTableViewCell: UITableViewCell {
     //MARK:- Set up Handlers
 
     @IBAction func settingsBtnPressed(_ sender: Any) {
-
+                
         didCheckKeepScreenOn = !didCheckKeepScreenOn
         didCheckPauseOn = !didCheckPauseOn
         didCheckWormUp = !didCheckWormUp

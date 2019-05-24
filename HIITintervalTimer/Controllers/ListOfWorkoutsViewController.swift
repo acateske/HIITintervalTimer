@@ -7,10 +7,13 @@
 //
 
 import UIKit
+//import RealmSwift
 
 class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Set up properties
+    
+ //   let realm = try! Realm()
     
     var selectedRow: Int?
     
@@ -52,6 +55,8 @@ class ListOfWorkoutsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
+        
+       // load()
     }
 }
 
@@ -69,20 +74,30 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
         
         cell.backgroundColor = UIColor.black
         cell.selectionStyle = .none
-        cell.trainingNameLabel.text = workoutTrainings[indexPath.row].nameOfTraining
         cell.deleteDelegate = self
         cell.editDelegate = self
         
-        let timeInterval = workoutTrainings[indexPath.row].totalTime
-        let seconds = lroundf(Float(timeInterval))
-        let hour = seconds / 3600
-        let min = (seconds % 3600) / 60
-        let sec = seconds % 60
+            cell.trainingNameLabel.text = workoutTrainings[indexPath.row].nameOfTraining
+            
+            let timeInterval = workoutTrainings[indexPath.row].totalTime
+            let seconds = lroundf(Float(timeInterval))
+            let hour = seconds / 3600
+            let min = (seconds % 3600) / 60
+            let sec = seconds % 60
+            
+            let workingTime = String(format: "%02d", hour) + ":" + String(format: "%02d", min) + ":" + String(format: "%02d", sec)
+            
+            cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
         
-        let workingTime = String(format: "%02d", hour) + ":" + String(format: "%02d", min) + ":" + String(format: "%02d", sec)
-        
-        cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
         return cell
+    }
+    
+    //MARK: Set up handler for load data
+    
+    func load() {
+        
+//        workoutTrainings = realm.objects(Workout.self)
+//        tableView.reloadData()
     }
 }
 

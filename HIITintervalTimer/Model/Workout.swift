@@ -7,6 +7,19 @@
 //
 
 import Foundation
+//import RealmSwift
+
+//class Workout: Object {
+//
+//    @objc dynamic var nameOfTraining = ""
+//    @objc dynamic var numberOfRounds = 0
+//    @objc dynamic var actionSeconds = 0
+//    @objc dynamic var restSeconds = 0
+//    @objc dynamic var totalTime = 0.0
+//
+//}
+//
+//var workoutTrainings: Results<Workout>?
 
 class Workout {
     

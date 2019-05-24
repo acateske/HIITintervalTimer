@@ -7,10 +7,13 @@
 //
 
 import UIKit
+//import RealmSwift
 
 class AddActionViewController: UIViewController {
 
     //MARK: - Set up propeties
+    
+   // let realm = try! Realm()
     
     var numberOfRounds = 0
     var numberOfActionSeconds = 0
@@ -136,15 +139,14 @@ class AddActionViewController: UIViewController {
     }
     
     func saveAction() {
-        
-        let workout = Workout()
-        
-        workout.nameOfTraining = trainingNameTextField.text!
-        workout.numberOfRounds = numberOfRounds
-        workout.actionSeconds = numberOfActionSeconds
-        workout.restSeconds = numberOfRestSeconds
-        workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
-        workoutTrainings.append(workout)
+       
+                let workout = Workout()
+                workout.nameOfTraining = trainingNameTextField.text!
+                workout.numberOfRounds = numberOfRounds
+                workout.actionSeconds = numberOfActionSeconds
+                workout.restSeconds = numberOfRestSeconds
+                workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
+                workoutTrainings.append(workout)
     }
     
     func resetAction() {
@@ -211,7 +213,7 @@ class AddActionViewController: UIViewController {
             if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
                 
                 let workout = workoutTrainings[recivedSelectedRow]
-                
+
                 numberOfRounds = workout.numberOfRounds
                 labelForRounds.text = "\(numberOfRounds) ROUNDS"
                 trainingNameTextField.text = workout.nameOfTraining
@@ -219,7 +221,7 @@ class AddActionViewController: UIViewController {
                 actionLabel.text = "\(numberOfActionSeconds) SECONDS"
                 numberOfRestSeconds = workout.restSeconds
                 restLabel.text = "\(numberOfRestSeconds) SECONDS"
-                
+
                 workoutTrainings.remove(at: recivedSelectedRow)
             }
         }

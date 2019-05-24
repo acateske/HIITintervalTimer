@@ -11,9 +11,18 @@ import RealmSwift
 
 class Settings: Object {
     
+    @objc dynamic var yourPrimaryKey = 0
     @objc dynamic var keepScreenOn: Bool = false
     @objc dynamic var pauseOn: Bool = false
     @objc dynamic var wormUp: Bool = false
+    
+    override class func primaryKey() -> String {
+        return "yourPrimaryKey"
+    }
 }
 
 var settings = Settings()
+
+
+
+

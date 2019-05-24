@@ -116,7 +116,6 @@ class TrainingViewController: UIViewController {
         action = workoutTrainings[selectedTraining].actionSeconds
         rest = workoutTrainings[selectedTraining].restSeconds
         
-//        guard let wormUp = settings?.first?.wormUp else {return}
         if wormUp {
             seconds = action
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(secForWormUp))
