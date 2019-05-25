@@ -14,6 +14,8 @@ class TrainingViewController: UIViewController {
     
     //MARK:- Set up properties
     
+    let realm = try! Realm()
+    
     var player: AVAudioPlayer?
     var cool = false
     var round = 1
@@ -106,15 +108,16 @@ class TrainingViewController: UIViewController {
     
     func updateView() {
         
-        guard let selectedTraining = selectedTraining else {return}
+        guard let selectedTraining = selectedTraining else {fatalError()}
+        guard let workout = workoutTrainings?[selectedTraining] else {fatalError()}
         
-        title = workoutTrainings[selectedTraining].nameOfTraining
-        numberOfRounds = workoutTrainings[selectedTraining].numberOfRounds
+        title = workout.nameOfTraining
+        numberOfRounds = workout.numberOfRounds
         numberOfRoundsLabel.text = "ROUND 1/\(numberOfRounds)"
-        totalTime = workoutTrainings[selectedTraining].totalTime
+        totalTime = workout.totalTime
         totalTimeLabel.text = timeStringTotalTime(time: TimeInterval(totalTime))
-        action = workoutTrainings[selectedTraining].actionSeconds
-        rest = workoutTrainings[selectedTraining].restSeconds
+        action = workout.actionSeconds
+        rest = workout.restSeconds
         
         if wormUp {
             seconds = action

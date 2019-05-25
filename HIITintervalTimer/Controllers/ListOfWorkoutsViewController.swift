@@ -7,13 +7,13 @@
 //
 
 import UIKit
-//import RealmSwift
+import RealmSwift
 
 class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Set up properties
     
- //   let realm = try! Realm()
+    let realm = try! Realm()
     
     var selectedRow: Int?
     
@@ -56,7 +56,7 @@ class ListOfWorkoutsViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = 109.0
         
-       // load()
+        load()
     }
 }
 
@@ -65,7 +65,7 @@ class ListOfWorkoutsViewController: UIViewController {
 extension ListOfWorkoutsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workoutTrainings.count
+        return workoutTrainings?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,9 +77,9 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
         cell.deleteDelegate = self
         cell.editDelegate = self
         
-            cell.trainingNameLabel.text = workoutTrainings[indexPath.row].nameOfTraining
-            
-            let timeInterval = workoutTrainings[indexPath.row].totalTime
+        if let workout = workoutTrainings?[indexPath.row] {
+            cell.trainingNameLabel.text = workout.nameOfTraining
+            let timeInterval = workout.totalTime
             let seconds = lroundf(Float(timeInterval))
             let hour = seconds / 3600
             let min = (seconds % 3600) / 60
@@ -88,7 +88,7 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
             let workingTime = String(format: "%02d", hour) + ":" + String(format: "%02d", min) + ":" + String(format: "%02d", sec)
             
             cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
-        
+        }
         return cell
     }
     
@@ -96,8 +96,8 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     
     func load() {
         
-//        workoutTrainings = realm.objects(Workout.self)
-//        tableView.reloadData()
+        workoutTrainings = realm.objects(Workout.self)
+        tableView.reloadData()
     }
 }
 
@@ -108,8 +108,19 @@ extension ListOfWorkoutsViewController: CustomDeleteDelegate {
     func deleteButtonPressed(cell: WorkoutTableViewCell) {
 
         guard let index = tableView.indexPath(for: cell)?.row else {return}
-        workoutTrainings.remove(at: index)
-        tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+       // workoutTrainings.remove(at: index)
+        if let workout = workoutTrainings?[index] {
+            do {
+                try realm.write {
+                    realm.delete(workout)
+                }
+            } catch {
+                print("Error", error.localizedDescription)
+            }
+            tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+
+        }
+        
     }
 }
 

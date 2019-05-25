@@ -7,13 +7,13 @@
 //
 
 import UIKit
-//import RealmSwift
+import RealmSwift
 
 class AddActionViewController: UIViewController {
 
     //MARK: - Set up propeties
     
-   // let realm = try! Realm()
+    let realm = try! Realm()
     
     var numberOfRounds = 0
     var numberOfActionSeconds = 0
@@ -116,6 +116,9 @@ class AddActionViewController: UIViewController {
         view.backgroundColor = UIColor.black
         setUpNavigationBar()
         trainingNameTextField.delegate = self
+        
+        print("#################: Workouts Object")
+        print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     //MARK:- Set up Handlers
@@ -139,14 +142,21 @@ class AddActionViewController: UIViewController {
     }
     
     func saveAction() {
-       
-                let workout = Workout()
-                workout.nameOfTraining = trainingNameTextField.text!
-                workout.numberOfRounds = numberOfRounds
-                workout.actionSeconds = numberOfActionSeconds
-                workout.restSeconds = numberOfRestSeconds
-                workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
-                workoutTrainings.append(workout)
+        
+        let workout = Workout()
+        workout.nameOfTraining = trainingNameTextField.text!
+        workout.numberOfRounds = numberOfRounds
+        workout.actionSeconds = numberOfActionSeconds
+        workout.restSeconds = numberOfRestSeconds
+        workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
+        do {
+            try realm.write {
+                realm.add(workout)
+            }
+        } catch {
+            print("Error saving workouts!")
+        }
+        //   workoutTrainings.append(workout)
     }
     
     func resetAction() {
@@ -212,7 +222,7 @@ class AddActionViewController: UIViewController {
             
             if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
                 
-                let workout = workoutTrainings[recivedSelectedRow]
+                let workout = workoutTrainings![recivedSelectedRow]
 
                 numberOfRounds = workout.numberOfRounds
                 labelForRounds.text = "\(numberOfRounds) ROUNDS"
@@ -222,7 +232,14 @@ class AddActionViewController: UIViewController {
                 numberOfRestSeconds = workout.restSeconds
                 restLabel.text = "\(numberOfRestSeconds) SECONDS"
 
-                workoutTrainings.remove(at: recivedSelectedRow)
+              //  workoutTrainings.remove(at: recivedSelectedRow)
+                do {
+                    try realm.write {
+                        realm.delete(workout)
+                    }
+                } catch {
+                    print("Error", error.localizedDescription)
+                }
             }
         }
     }
