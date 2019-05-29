@@ -26,8 +26,8 @@ class SettingsTableViewController: UITableViewController {
         
         title = "Settings"
         tableView.tableFooterView = UIView()
-        print("#################: Settings Object")
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+       // print(Realm.Configuration.defaultConfiguration.fileURL)
        
         load()
     }

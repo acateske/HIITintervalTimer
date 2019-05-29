@@ -15,6 +15,7 @@ class AddActionViewController: UIViewController {
     
     let realm = try! Realm()
     
+    var recivedRow: Int?
     var numberOfRounds = 0
     var numberOfActionSeconds = 0
     var numberOfRestSeconds = 0
@@ -114,18 +115,34 @@ class AddActionViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.black
-        setUpNavigationBar()
+        title = "WORKOUTS"
         trainingNameTextField.delegate = self
-        
-        print("#################: Workouts Object")
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        updateView()
+       // print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     //MARK:- Set up Handlers
     
-    func setUpNavigationBar() {
+    func updateView() {
         
-        title = "WORKOUTS"
+        if recivedRow != nil {
+            let workout = workoutTrainings![recivedRow!]
+            numberOfRounds = workout.numberOfRounds
+            labelForRounds.text = "\(numberOfRounds) ROUNDS"
+            trainingNameTextField.text = workout.nameOfTraining
+            numberOfActionSeconds = workout.actionSeconds
+            actionLabel.text = "\(numberOfActionSeconds) SECONDS"
+            numberOfRestSeconds = workout.restSeconds
+            restLabel.text = "\(numberOfRestSeconds) SECONDS"
+            
+            do {
+                try realm.write {
+                    realm.delete(workout)
+                }
+            } catch {
+                print("Error", error.localizedDescription)
+            }
+        }
     }
     
     @IBAction func saveBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -156,7 +173,6 @@ class AddActionViewController: UIViewController {
         } catch {
             print("Error saving workouts!")
         }
-        //   workoutTrainings.append(workout)
     }
     
     func resetAction() {
@@ -216,12 +232,14 @@ class AddActionViewController: UIViewController {
     
     //MARK:- Set up Unwind Seque Method
     
+    
+   /*
     @IBAction func unwindToAddActionVC(segue: UIStoryboardSegue) {
-        
+        print("######### Unwind")
         if let listOfWorkoutsVC = segue.source as? ListOfWorkoutsViewController {
-            
+
             if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
-                
+              //  print("recibedSElectedRow: \(recivedSelectedRow)")
                 let workout = workoutTrainings![recivedSelectedRow]
 
                 numberOfRounds = workout.numberOfRounds
@@ -243,6 +261,7 @@ class AddActionViewController: UIViewController {
             }
         }
     }
+    */
 }
 
 //MARK:- Set up TextFieldDelegate Method

@@ -94,11 +94,11 @@ class TrainingViewController: UIViewController {
         updateView()
         
          NotificationCenter.default.addObserver(self, selector: #selector(appResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        
     }
     
     @objc func appResignActive() {
         
-//        guard let pauseOn = settings?.first?.pauseOn else {return}
         if settings.pauseOn {
             timer.invalidate()
             timer2.invalidate()

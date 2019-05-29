@@ -57,6 +57,12 @@ class ListOfWorkoutsViewController: UIViewController {
         tableView.rowHeight = 109.0
         
         load()
+        
+        if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
+            settings = settingsData
+        } else {
+            print("Not save data yet!!!")
+        }
     }
 }
 
@@ -108,7 +114,6 @@ extension ListOfWorkoutsViewController: CustomDeleteDelegate {
     func deleteButtonPressed(cell: WorkoutTableViewCell) {
 
         guard let index = tableView.indexPath(for: cell)?.row else {return}
-       // workoutTrainings.remove(at: index)
         if let workout = workoutTrainings?[index] {
             do {
                 try realm.write {
@@ -118,18 +123,17 @@ extension ListOfWorkoutsViewController: CustomDeleteDelegate {
                 print("Error", error.localizedDescription)
             }
             tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-
         }
-        
     }
 }
 
 extension ListOfWorkoutsViewController: CustomEditDelegate {
     
     func editButtonPressed(cell: WorkoutTableViewCell) {
-        
+      
         guard let index = tableView.indexPath(for: cell)?.row else {return}
-        selectedRow = index       
+        selectedRow = index
+        performSegue(withIdentifier: "goBackToAddAction", sender: self)
     }
 }
 
@@ -144,10 +148,17 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let trainingVC = segue.destination as? TrainingViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                trainingVC.selectedTraining = indexPath.row
+        if segue.identifier == "gotoTrainingVC" {
+            if let trainingVC = segue.destination as? TrainingViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    trainingVC.selectedTraining = indexPath.row
+                }
+            }
+        } else if segue.identifier == "goBackToAddAction" {
+            if let actionVC = segue.destination as? AddActionViewController {
+                actionVC.recivedRow = selectedRow
             }
         }
+        
     }
 }
