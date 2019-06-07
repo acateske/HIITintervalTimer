@@ -229,39 +229,6 @@ class AddActionViewController: UIViewController {
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
         }
     }
-    
-    //MARK:- Set up Unwind Seque Method
-    
-    
-   /*
-    @IBAction func unwindToAddActionVC(segue: UIStoryboardSegue) {
-        print("######### Unwind")
-        if let listOfWorkoutsVC = segue.source as? ListOfWorkoutsViewController {
-
-            if let recivedSelectedRow = listOfWorkoutsVC.selectedRow {
-              //  print("recibedSElectedRow: \(recivedSelectedRow)")
-                let workout = workoutTrainings![recivedSelectedRow]
-
-                numberOfRounds = workout.numberOfRounds
-                labelForRounds.text = "\(numberOfRounds) ROUNDS"
-                trainingNameTextField.text = workout.nameOfTraining
-                numberOfActionSeconds = workout.actionSeconds
-                actionLabel.text = "\(numberOfActionSeconds) SECONDS"
-                numberOfRestSeconds = workout.restSeconds
-                restLabel.text = "\(numberOfRestSeconds) SECONDS"
-
-              //  workoutTrainings.remove(at: recivedSelectedRow)
-                do {
-                    try realm.write {
-                        realm.delete(workout)
-                    }
-                } catch {
-                    print("Error", error.localizedDescription)
-                }
-            }
-        }
-    }
-    */
 }
 
 //MARK:- Set up TextFieldDelegate Method

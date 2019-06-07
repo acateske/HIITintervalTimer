@@ -24,6 +24,7 @@ class TrainingViewController: UIViewController {
     var timer2 = Timer()
     var secForWormUp = 10
     var wormUp = settings.wormUp
+    var soundOn = settings.sound
     var selectedTraining: Int?
     var numberOfRounds = 0
     var totalTime = 0.0
@@ -94,7 +95,6 @@ class TrainingViewController: UIViewController {
         updateView()
         
          NotificationCenter.default.addObserver(self, selector: #selector(appResignActive), name: UIApplication.willResignActiveNotification, object: nil)
-        
     }
     
     @objc func appResignActive() {
@@ -145,15 +145,17 @@ class TrainingViewController: UIViewController {
     let soundFinished = "34943__sir-yaro__finished"
     
     
-    func playSound(with sound: String, extensionn: String = "wav") {
+    func playSound(with sound: String, extensionn: String = "wav", soundOn: Bool) {
         
-        guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
-        do {
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
-            guard let player = player else { return }
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
+        if !soundOn {
+            guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
+            do {
+                player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+                guard let player = player else { return }
+                player.play()
+            } catch let error {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -181,7 +183,7 @@ class TrainingViewController: UIViewController {
             wormUp = false
             timer2.invalidate()
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
-            playSound(with: soundReady)
+            playSound(with: soundReady, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
             workingTimeLabel.textColor = UIColor.neonYellow
@@ -204,7 +206,7 @@ class TrainingViewController: UIViewController {
                 round += 1
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
                 workingTimeLabel.textColor = UIColor.neonYellow
-                playSound(with: soundReady)
+                playSound(with: soundReady, soundOn: soundOn)
             } else if seconds > 1 {
                 seconds -= 1
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -219,7 +221,7 @@ class TrainingViewController: UIViewController {
                 labelName.text = "Finished"
                 labelName.textColor = UIColor.neonRed
                 workingTimeLabel.text = "00:00"
-                playSound(with: soundFinished)
+                playSound(with: soundFinished, soundOn: soundOn)
                 startWorkingButton.isEnabled = false
             }
         } else {
@@ -229,7 +231,7 @@ class TrainingViewController: UIViewController {
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
                 workingTimeLabel.textColor = UIColor.neonRed
                 labelName.text = "Rest"
-                playSound(with: soundRest)
+                playSound(with: soundRest, soundOn: soundOn)
             } else if seconds <= 1 && rest == 0 && round != numberOfRounds {
                 seconds = action
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -265,11 +267,11 @@ class TrainingViewController: UIViewController {
 //        guard let wormUp = wormUp else {return}
         
         if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && !wormUp {
-            playSound(with: soundReady)
+            playSound(with: soundReady, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
         } else if sender.currentImage == UIImage(named: "mediaPlaySymbol") && cool {
-            playSound(with: soundRest)
+            playSound(with: soundRest, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
         } else if sender.currentImage == UIImage(named: "union1") && !wormUp  {

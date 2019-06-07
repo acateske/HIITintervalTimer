@@ -17,6 +17,7 @@ class SettingsTableViewCell: UITableViewCell {
     var didCheckKeepScreenOn = settings.keepScreenOn
     var didCheckPauseOn = settings.pauseOn
     var didCheckWormUp = settings.wormUp
+    var didSoundOn = settings.sound
     
     @IBOutlet weak var settingsLabel: UILabel! {
         didSet {
@@ -34,7 +35,8 @@ class SettingsTableViewCell: UITableViewCell {
         didCheckKeepScreenOn = !didCheckKeepScreenOn
         didCheckPauseOn = !didCheckPauseOn
         didCheckWormUp = !didCheckWormUp
+        didSoundOn = !didSoundOn
         
-        delegate?.didTapSettingsBtn(cell: self, didCheckKeepScreenOn: didCheckKeepScreenOn, didCheckPauseOn: didCheckPauseOn, didCheckWormUp: didCheckWormUp)
+        delegate?.didTapSettingsBtn(cell: self, didCheckKeepScreenOn: didCheckKeepScreenOn, didCheckPauseOn: didCheckPauseOn, didCheckWormUp: didCheckWormUp, didSoundOn: didSoundOn)
     }
 }

@@ -15,6 +15,7 @@ class Settings: Object {
     @objc dynamic var keepScreenOn: Bool = false
     @objc dynamic var pauseOn: Bool = false
     @objc dynamic var wormUp: Bool = false
+    @objc dynamic var sound: Bool = false
     
     override class func primaryKey() -> String {
         return "yourPrimaryKey"

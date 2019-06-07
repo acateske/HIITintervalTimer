@@ -16,7 +16,7 @@ class SettingsTableViewController: UITableViewController {
     
     let realm = try! Realm()
     
-    var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "Rate the app"]
+    var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "No sound", "Rate the app"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +63,14 @@ class SettingsTableViewController: UITableViewController {
             
         } else if indexPath.row == 2 {
             if settings.wormUp {
+                configureActiveSettingsBtn(with: cell)
+            } else {
+                configureInActiveSettingsBtn(with: cell)
+            }
+            configureCell(with: cell, indexPath: indexPath)
+            return cell
+        } else if indexPath.row == 3 {
+            if settings.sound {
                 configureActiveSettingsBtn(with: cell)
             } else {
                 configureInActiveSettingsBtn(with: cell)
@@ -129,7 +137,7 @@ class SettingsTableViewController: UITableViewController {
 
 extension SettingsTableViewController: DidTapSettingsBtn {
     
-    func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool) {
+    func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool) {
         
         let cellTag = cell.settingsButton.tag
         
@@ -190,6 +198,26 @@ extension SettingsTableViewController: DidTapSettingsBtn {
                 do {
                     try realm.write {
                         settings.wormUp = didCheckWormUp
+                    }
+                } catch {
+                    print("error")
+                }
+            }
+        } else if cellTag == 3 {
+            if didSoundOn {
+                configureActiveSettingsBtn(with: cell)
+                do {
+                    try realm.write {
+                        settings.sound = didSoundOn
+                    }
+                } catch {
+                    print("error")
+                }
+            } else {
+                configureInActiveSettingsBtn(with: cell)
+                do {
+                    try realm.write {
+                        settings.sound = didSoundOn
                     }
                 } catch {
                     print("error")
