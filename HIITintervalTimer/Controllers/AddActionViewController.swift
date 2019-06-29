@@ -15,6 +15,8 @@ class AddActionViewController: UIViewController {
     
     let realm = try! Realm()
     
+    let settingsLauncher = SettingsLauncher()
+    
     var recivedRow: Int?
     var numberOfRounds = 0
     var numberOfActionSeconds = 0
@@ -28,15 +30,17 @@ class AddActionViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var restColorView: UIView! {
+    @IBOutlet weak var actionBtnColor: UIButton! {
         didSet {
-            restColorView.backgroundColor = UIColor.neonRed
+            actionBtnColor.backgroundColor = colorForActionBtn
+            actionBtnColor.tag = 1
         }
     }
     
-    @IBOutlet weak var actionColorView: UIView! {
+    @IBOutlet weak var restBtnColor: UIButton! {
         didSet {
-            actionColorView.backgroundColor = UIColor.neonYellow
+            restBtnColor.backgroundColor = colorForRestBtn
+            restBtnColor.tag = 2
         }
     }
     
@@ -93,6 +97,16 @@ class AddActionViewController: UIViewController {
         }
     }
     
+    @IBAction func actionBtnColorPressed(_ sender: UIButton) {
+        
+        handlerMoreAction(sender: sender.tag)
+    }
+    
+    @IBAction func restBtnColorPressed(_ sender: UIButton) {
+        
+        handleMoreRest(sender: sender.tag)
+    }
+    
     @IBOutlet weak var saveBarButton: UIBarButtonItem! {
         didSet {
             saveBarButton.title = "SAVE"
@@ -123,6 +137,21 @@ class AddActionViewController: UIViewController {
     
     //MARK:- Set up Handlers
     
+    
+    func handlerMoreAction(sender tag: Int) {
+        
+        settingsLauncher.tag = tag
+        settingsLauncher.delegateActionColor = self
+        settingsLauncher.showSettings()
+    }
+    
+    func handleMoreRest(sender tag: Int) {
+        
+        settingsLauncher.tag = tag
+        settingsLauncher.delegateRestColor = self
+        settingsLauncher.showSettings()
+    }
+    
     func updateView() {
         
         if recivedRow != nil {
@@ -134,6 +163,7 @@ class AddActionViewController: UIViewController {
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
             numberOfRestSeconds = workout.restSeconds
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
+           // colorForActionBtn = workout.colorAction
             
             do {
                 try realm.write {
@@ -166,6 +196,7 @@ class AddActionViewController: UIViewController {
         workout.actionSeconds = numberOfActionSeconds
         workout.restSeconds = numberOfRestSeconds
         workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
+      //  workout.colorAction = ""
         do {
             try realm.write {
                 realm.add(workout)
@@ -187,7 +218,6 @@ class AddActionViewController: UIViewController {
         actionLabel.text = "0 SECONDS"
         restLabel.text = "0 SECONDS"
     }
-   
     
     @IBAction func addButtonRounds(_ sender: Any) {
         
@@ -244,5 +274,20 @@ extension AddActionViewController: UITextFieldDelegate {
         trainingNameTextField.resignFirstResponder()
         return true
     }
+}
+
+extension AddActionViewController: ChangeColorRest {
     
+    func changeColorRest(with color: UIColor) {
+        colorForRestBtn = color
+        restBtnColor.backgroundColor = colorForRestBtn
+    }
+}
+
+extension AddActionViewController: ChangeColorAction {
+    
+    func changeColorAction(with color: UIColor) {
+        colorForActionBtn = color
+        actionBtnColor.backgroundColor = colorForActionBtn
+    }
 }

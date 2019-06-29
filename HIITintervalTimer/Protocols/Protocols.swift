@@ -19,3 +19,11 @@ protocol CustomEditDelegate {
 protocol DidTapSettingsBtn {
     func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool)
 }
+
+protocol ChangeColorAction {
+    func changeColorAction(with color: UIColor)
+}
+
+protocol ChangeColorRest {
+    func changeColorRest(with color: UIColor)
+}

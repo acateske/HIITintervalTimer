@@ -159,6 +159,5 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
                 actionVC.recivedRow = selectedRow
             }
         }
-        
     }
 }

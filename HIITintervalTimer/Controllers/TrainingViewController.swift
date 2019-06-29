@@ -126,7 +126,7 @@ class TrainingViewController: UIViewController {
             workingTimeLabel.textColor = UIColor.white
         } else {
             seconds = action
-            workingTimeLabel.textColor = UIColor.neonYellow
+            workingTimeLabel.textColor = colorForActionBtn
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
         }
     }
@@ -186,7 +186,7 @@ class TrainingViewController: UIViewController {
             playSound(with: soundReady, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
-            workingTimeLabel.textColor = UIColor.neonYellow
+            workingTimeLabel.textColor = colorForActionBtn
             labelName.text = "Workout"
         } else {
             secForWormUp -= 1
@@ -205,7 +205,7 @@ class TrainingViewController: UIViewController {
                 labelName.text = "Workout"
                 round += 1
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
-                workingTimeLabel.textColor = UIColor.neonYellow
+                workingTimeLabel.textColor = colorForActionBtn
                 playSound(with: soundReady, soundOn: soundOn)
             } else if seconds > 1 {
                 seconds -= 1
@@ -229,7 +229,7 @@ class TrainingViewController: UIViewController {
                 cool = true
                 seconds = rest
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
-                workingTimeLabel.textColor = UIColor.neonRed
+                workingTimeLabel.textColor = colorForRestBtn
                 labelName.text = "Rest"
                 playSound(with: soundRest, soundOn: soundOn)
             } else if seconds <= 1 && rest == 0 && round != numberOfRounds {
@@ -240,14 +240,14 @@ class TrainingViewController: UIViewController {
             } else if seconds <= 1 && rest == 0 && round == numberOfRounds {
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
                 workingTimeLabel.text = "00:00"
-                workingTimeLabel.textColor = UIColor.neonRed
+                workingTimeLabel.textColor = colorForRestBtn
                 labelName.text = "Finished"
                 clapImageView.isHidden = false
                 labelName.textColor = UIColor.neonRed
             } else {
                 seconds -= 1
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
-                workingTimeLabel.textColor = UIColor.neonYellow
+                workingTimeLabel.textColor = colorForActionBtn
             }
         }
     }
@@ -263,9 +263,7 @@ class TrainingViewController: UIViewController {
     }
     
     @IBAction func startWorkingPressed(_ sender: UIButton) {
-       
-//        guard let wormUp = wormUp else {return}
-        
+               
         if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && !wormUp {
             playSound(with: soundReady, soundOn: soundOn)
             runTimer()
