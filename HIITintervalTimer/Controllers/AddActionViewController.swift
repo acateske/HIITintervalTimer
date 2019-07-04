@@ -9,11 +9,15 @@
 import UIKit
 import RealmSwift
 
+var colorForActionBtn = UIColor.neonYellow
+var colorForRestBtn = UIColor.neonRed
+
 class AddActionViewController: UIViewController {
 
-    //MARK: - Set up propeties
+    //MARK: - Set up properties
     
     let realm = try! Realm()
+    var timer: Timer?
     
     let settingsLauncher = SettingsLauncher()
     
@@ -22,6 +26,13 @@ class AddActionViewController: UIViewController {
     var numberOfActionSeconds = 0
     var numberOfRestSeconds = 0
     var totalTime = 0
+    
+    @IBOutlet weak var addRoundsBtn: UIButton!
+    @IBOutlet weak var reduceRoundBtn: UIButton!
+    @IBOutlet weak var addActionSecondsBtn: UIButton!
+    @IBOutlet weak var reduceActionSecondsBtn: UIButton!
+    @IBOutlet weak var addRestSecondsBtn: UIButton!
+    @IBOutlet weak var reduceRestSecondsBtn: UIButton!
     
     @IBOutlet weak var trainingNameTextField: UITextField! {
         didSet {
@@ -132,10 +143,128 @@ class AddActionViewController: UIViewController {
         title = "WORKOUTS"
         trainingNameTextField.delegate = self
         updateView()
+        
+        let longPressGestureAddRRounds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureAddRounds))
+        addRoundsBtn.addGestureRecognizer(longPressGestureAddRRounds)
+        let longPressGestureReduceRounds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureReduceRounds))
+        reduceRoundBtn.addGestureRecognizer(longPressGestureReduceRounds)
+        let longPressGestureAddActionSeconds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureAddActionSeconds))
+        addActionSecondsBtn.addGestureRecognizer(longPressGestureAddActionSeconds)
+        let longPressGestureReduceActionSeconds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureReduceActionSeconds))
+        reduceActionSecondsBtn.addGestureRecognizer(longPressGestureReduceActionSeconds)
+        let longPressGestureAddRestSeconds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureAddRestSeconds))
+        addRestSecondsBtn.addGestureRecognizer(longPressGestureAddRestSeconds)
+        let longPressGestureReduceRestSeconds = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGestureReduceRestSeconds))
+        reduceRestSecondsBtn.addGestureRecognizer(longPressGestureReduceRestSeconds)
+        
        // print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     //MARK:- Set up Handlers
+    
+    @objc func handleLongPressGestureAddRestSeconds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddRestSeconds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureAddRestSeconds() {
+        
+        numberOfRestSeconds += 1
+        restLabel.text = "\(numberOfRestSeconds) SECONDS"
+    }
+    
+    @objc func handleLongPressGestureReduceRestSeconds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceRestSeconds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureReduceRestSeconds() {
+        
+        if numberOfRestSeconds > 0 {
+            numberOfRestSeconds -= 1
+            restLabel.text = "\(numberOfRestSeconds) SECONDS"
+        }
+    }
+    
+    
+    @objc func handleLongPressGestureAddActionSeconds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddActionSeconds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureAddActionSeconds() {
+        
+        numberOfActionSeconds += 1
+        actionLabel.text = "\(numberOfActionSeconds) SECONDS"
+    }
+    
+    @objc func handleLongPressGestureReduceActionSeconds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceActionSeconds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureReduceActionSeconds() {
+        
+        if numberOfActionSeconds > 0 {
+            numberOfActionSeconds -= 1
+            actionLabel.text = "\(numberOfActionSeconds) SECONDS"
+        }
+    }
+    
+    
+    @objc func handleLongPressGestureAddRounds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddRounds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureAddRounds() {
+        
+        numberOfRounds += 1
+        labelForRounds.text = "\(numberOfRounds) ROUNDS"
+    }
+    
+    @objc func handleLongPressGestureReduceRounds(gesture: UILongPressGestureRecognizer) {
+        
+        if gesture.state == .began {
+            timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceRounds), userInfo: nil, repeats: true)
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func handleGestureReduceRounds() {
+        
+        if numberOfRounds > 0 {
+            numberOfRounds -= 1
+            labelForRounds.text = "\(numberOfRounds) ROUNDS"
+        }
+    }
     
     
     func handlerMoreAction(sender tag: Int) {
@@ -163,7 +292,11 @@ class AddActionViewController: UIViewController {
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
             numberOfRestSeconds = workout.restSeconds
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
-           // colorForActionBtn = workout.colorAction
+           
+            colorForActionBtn = UIColor(hexString: workout.colorAction)!
+            colorForRestBtn = UIColor(hexString: workout.colorRest)!
+            actionBtnColor.backgroundColor = colorForActionBtn
+            restBtnColor.backgroundColor = colorForRestBtn
             
             do {
                 try realm.write {
@@ -196,7 +329,8 @@ class AddActionViewController: UIViewController {
         workout.actionSeconds = numberOfActionSeconds
         workout.restSeconds = numberOfRestSeconds
         workout.totalTime = Double(numberOfRounds*(numberOfRestSeconds + numberOfActionSeconds))
-      //  workout.colorAction = ""
+        workout.colorAction = colorForActionBtn.hexValue()
+        workout.colorRest = colorForRestBtn.hexValue()
         do {
             try realm.write {
                 realm.add(workout)
@@ -212,6 +346,11 @@ class AddActionViewController: UIViewController {
         numberOfRestSeconds = 0
         numberOfActionSeconds = 0
         totalTime = 0
+        
+        colorForRestBtn = UIColor.neonRed
+        colorForActionBtn = UIColor.neonYellow
+        actionBtnColor.backgroundColor = colorForActionBtn
+        restBtnColor.backgroundColor = colorForRestBtn
         
         trainingNameTextField.text = ""
         labelForRounds.text = "0 ROUNDS"
@@ -238,6 +377,7 @@ class AddActionViewController: UIViewController {
         numberOfActionSeconds += 1
         actionLabel.text = "\(numberOfActionSeconds) SECONDS"
     }
+    
     @IBAction func reduceActionSecondsBtn(_ sender: Any) {
         
         if numberOfActionSeconds > 0 {

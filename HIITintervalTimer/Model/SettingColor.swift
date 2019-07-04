@@ -19,5 +19,3 @@ class SettingColor {
     }
 }
 
-var colorForActionBtn = UIColor.neonYellow
-var colorForRestBtn = UIColor.neonRed

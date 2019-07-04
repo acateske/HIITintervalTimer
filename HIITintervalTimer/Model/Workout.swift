@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class Workout: Object {
 
@@ -16,7 +17,8 @@ class Workout: Object {
     @objc dynamic var actionSeconds = 0
     @objc dynamic var restSeconds = 0
     @objc dynamic var totalTime = 0.0
-  //  @objc dynamic var colorAction = ""
+    @objc dynamic var colorAction = ""
+    @objc dynamic var colorRest = ""
 }
 
 var workoutTrainings: Results<Workout>?

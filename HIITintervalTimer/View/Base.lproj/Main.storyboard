@@ -322,8 +322,14 @@
                         <outlet property="actionLabel" destination="4rw-0z-Lr9" id="c0D-f3-Ks9"/>
                         <outlet property="actionNameLabel" destination="aqI-xj-kRM" id="3mz-uR-I44"/>
                         <outlet property="addActionButton" destination="Jp8-ZC-JWd" id="DN5-0W-hKN"/>
+                        <outlet property="addActionSecondsBtn" destination="HiC-4i-Hvt" id="xIV-5T-lJe"/>
+                        <outlet property="addRestSecondsBtn" destination="9QM-F4-JYW" id="DST-9c-qGj"/>
+                        <outlet property="addRoundsBtn" destination="wEn-NZ-stg" id="jig-rz-RhH"/>
                         <outlet property="labelForRounds" destination="EGT-kj-5n0" id="ajr-ht-OMM"/>
                         <outlet property="labelName" destination="mXY-iu-ERC" id="hOm-ps-luV"/>
+                        <outlet property="reduceActionSecondsBtn" destination="rXk-qC-BmK" id="1AT-dC-wrP"/>
+                        <outlet property="reduceRestSecondsBtn" destination="B1E-ed-qVd" id="gLD-sq-ax5"/>
+                        <outlet property="reduceRoundBtn" destination="Kb3-qh-wiC" id="8pr-UU-bAI"/>
                         <outlet property="restBtnColor" destination="JXh-Zc-n5X" id="gAB-tJ-3ds"/>
                         <outlet property="restLabel" destination="r2G-w7-kzx" id="hNj-66-4yP"/>
                         <outlet property="saveBarButton" destination="bZN-Ru-7uw" id="GXe-ar-ZcN"/>
@@ -586,7 +592,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coW-cN-Xum" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3828" y="157"/>
+            <point key="canvasLocation" x="3833" y="134"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="LE3-j4-kGr">
