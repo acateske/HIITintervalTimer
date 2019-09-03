@@ -11,10 +11,9 @@ import RealmSwift
 
 class ListOfWorkoutsViewController: UIViewController {
     
-    //MARK:- Set up properties
+    //MARK:- Setup properties
     
     let realm = try! Realm()
-    
     var selectedRow: Int?
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
@@ -31,7 +30,6 @@ class ListOfWorkoutsViewController: UIViewController {
     }
     
     @IBAction func doneBarButton(_ sender: UIBarButtonItem) {
-        
          self.navigationController?.popViewController(animated: true)
     }
     
@@ -49,13 +47,11 @@ class ListOfWorkoutsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = UIColor.black
         title = "WORKOUTS"
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
-        
         load()
         
         if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
@@ -66,7 +62,7 @@ class ListOfWorkoutsViewController: UIViewController {
     }
 }
 
-//MARK:- Set up DataSource Methods
+//MARK:- Setup DataSource Methods
 
 extension ListOfWorkoutsViewController: UITableViewDataSource {
     
@@ -75,14 +71,10 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as! WorkoutTableViewCell
-        
         cell.backgroundColor = UIColor.black
         cell.selectionStyle = .none
-        cell.deleteDelegate = self
-        cell.editDelegate = self
-        
+        cell.delegate = self
         if let workout = workoutTrainings?[indexPath.row] {
             cell.trainingNameLabel.text = workout.nameOfTraining
             let timeInterval = workout.totalTime
@@ -90,29 +82,25 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
             let hour = seconds / 3600
             let min = (seconds % 3600) / 60
             let sec = seconds % 60
-            
             let workingTime = String(format: "%02d", hour) + ":" + String(format: "%02d", min) + ":" + String(format: "%02d", sec)
-            
             cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
         }
         return cell
     }
     
-    //MARK: Set up handler for load data
+    //MARK: Setup handler for load data
     
     func load() {
-        
         workoutTrainings = realm.objects(Workout.self)
         tableView.reloadData()
     }
 }
 
-//MARK:- Set up Protocol Methods
+//MARK:- Setup Protocol Methods
 
-extension ListOfWorkoutsViewController: CustomDeleteDelegate {
+extension ListOfWorkoutsViewController: WorkoutTableViewCellDelegate {
     
     func deleteButtonPressed(cell: WorkoutTableViewCell) {
-
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         if let workout = workoutTrainings?[index] {
             do {
@@ -125,29 +113,23 @@ extension ListOfWorkoutsViewController: CustomDeleteDelegate {
             tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
     }
-}
-
-extension ListOfWorkoutsViewController: CustomEditDelegate {
     
     func editButtonPressed(cell: WorkoutTableViewCell) {
-      
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         selectedRow = index
         performSegue(withIdentifier: "goBackToAddAction", sender: self)
     }
 }
 
-//MARK:- Set up Delegate Method
+//MARK:- Setup Delegate Method
 
 extension ListOfWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         performSegue(withIdentifier: "gotoTrainingVC", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "gotoTrainingVC" {
             if let trainingVC = segue.destination as? TrainingViewController {
                 if let indexPath = tableView.indexPathForSelectedRow {

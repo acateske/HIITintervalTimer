@@ -12,10 +12,9 @@ import RealmSwift
 
 class TrainingViewController: UIViewController {
     
-    //MARK:- Set up properties
+    //MARK:- Setup properties
     
     let realm = try! Realm()
-    
     var player: AVAudioPlayer?
     var cool = false
     var round = 1
@@ -100,7 +99,6 @@ class TrainingViewController: UIViewController {
     }
     
     @objc func appResignActive() {
-        
         if settings.pauseOn {
             timer.invalidate()
             timer2.invalidate()
@@ -109,10 +107,8 @@ class TrainingViewController: UIViewController {
     }
     
     func updateView() {
-        
         guard let selectedTraining = selectedTraining else {fatalError()}
         guard let workout = workoutTrainings?[selectedTraining] else {fatalError()}
-        
         title = workout.nameOfTraining
         numberOfRounds = workout.numberOfRounds
         numberOfRoundsLabel.text = "ROUND 1/\(numberOfRounds)"
@@ -137,20 +133,17 @@ class TrainingViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         timer2.invalidate()
         timer.invalidate()
     }
     
-    //MARK:- Set up AVAudio player
+    //MARK:- Setup AVAudio player
     
     let soundReady = "451270__alivvie__ready"
     let soundRest = "108889__tim-kahn__rest"
     let soundFinished = "34943__sir-yaro__finished"
     
-    
     func playSound(with sound: String, extensionn: String = "wav", soundOn: Bool) {
-        
         if !soundOn {
             guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
             do {
@@ -163,26 +156,22 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    //MARK: Set up Timer Methods
+    //MARK: Setup Timer Methods
     
     func runTimer() {
-        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     func runTimer2() {
-        
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerForPreparation), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
-        
         timerWorking()
         timerTotalTime()
     }
     
     @objc func timerForPreparation() {
-        
         if secForWormUp <= 1 {
             wormUp = false
             timer2.invalidate()
@@ -199,7 +188,6 @@ class TrainingViewController: UIViewController {
     }
     
     func timerWorking() {
-        
         if cool {
             if seconds <= 1 && round != numberOfRounds && action > 0 {
                 cool = false
@@ -257,7 +245,6 @@ class TrainingViewController: UIViewController {
     }
     
     func timerTotalTime() {
-        
         if totalTime < 1 {
             timer.invalidate()
         } else {
@@ -267,7 +254,7 @@ class TrainingViewController: UIViewController {
     }
     
     @IBAction func startWorkingPressed(_ sender: UIButton) {
-               
+        
         if sender.currentImage == UIImage(named: "mediaPlaySymbol") && !cool && !wormUp {
             playSound(with: soundReady, soundOn: soundOn)
             runTimer()
@@ -289,7 +276,6 @@ class TrainingViewController: UIViewController {
     }
     
     func timeStringTotalTime(time: TimeInterval) -> String {
-        
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
@@ -297,14 +283,12 @@ class TrainingViewController: UIViewController {
     }
     
     func timeStringWorkingTime(time: TimeInterval) -> String {
-        
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)
     }
     
     @IBAction func endTimerPressed(_ sender: UIButton) {
-        
         workingTimeLabel.textColor = UIColor.white
         timer.invalidate()
         timer2.invalidate()

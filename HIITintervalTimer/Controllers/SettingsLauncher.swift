@@ -8,15 +8,18 @@
 
 import UIKit
 
+protocol SettingsLauncherDelegate {
+    
+    func changeColorAction(with color: UIColor)
+    func changeColorRest(with color: UIColor)
+}
+
 class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
-    //MARK: - Set up properties
+    //MARK: - Setup properties
     
-    var delegateActionColor: ChangeColorAction?
-    var delegateRestColor: ChangeColorRest?
-    
+    var delegate: SettingsLauncherDelegate?
     var tag: Int?
-    
     let blackView = UIView()
     let cellID = "CellID"
     let cellHeight: CGFloat = 50
@@ -36,23 +39,19 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
                 SettingColor(name: "PINK", color: UIColor.purple)]
     }()
     
-    //MARK: - Set up handlers
+    //MARK: - Setup handlers
     
     func showSettings(){
-        
         if let window = UIApplication.shared.keyWindow {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             window.addSubview(blackView)
             window.addSubview(collectionView)
-            
             let height: CGFloat = CGFloat(settingColors.count) * cellHeight
             let y = window.frame.height - height
-            
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             blackView.frame = window.frame
             blackView.alpha = 0
-            
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
                 self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
@@ -61,28 +60,24 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     }
     
     @objc func handleDismiss() {
-        
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
-            
             if let window = UIApplication.shared.keyWindow {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
         }
     }
     
-    //MARK: - Set up Init
+    //MARK: - Setup Init
     
     override init() {
         super.init()
-        
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         collectionView.register(SettingColorCell.self, forCellWithReuseIdentifier: cellID)
     }
     
-    //MARK: - Set up Data source and delegate methods
+    //MARK: - Setup Data source and Delegate methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return settingColors.count
@@ -105,7 +100,6 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
@@ -114,9 +108,9 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         }) { (completed: Bool) in
             let selectedColor = self.settingColors[indexPath.item].color
             if self.tag == 1 {
-                self.delegateActionColor?.changeColorAction(with: selectedColor)
+                self.delegate?.changeColorAction(with: selectedColor)
             } else if self.tag == 2 {
-                self.delegateRestColor?.changeColorRest(with: selectedColor)
+                self.delegate?.changeColorRest(with: selectedColor)
             }
         }
     }

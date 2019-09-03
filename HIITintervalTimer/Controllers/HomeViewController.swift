@@ -9,9 +9,9 @@
 import UIKit
 import SideMenu
 
-class InitialViewController: UIViewController {
+class HomeViewController: UIViewController {
 
-    //MARK: - Set up properties
+    //MARK: - Setup properties
     
     @IBOutlet weak var addWorkOutButton: UIButton! {
         didSet {
@@ -32,16 +32,14 @@ class InitialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .black
         setUpNavigationBar()
         SideMenuManager.default.menuFadeStatusBar = false
     }
     
-    //MARK: - Set up Methods
+    //MARK: - Setup Methods
     
     func setUpNavigationBar() {
-        
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.barStyle = .black
@@ -50,9 +48,7 @@ class InitialViewController: UIViewController {
     }
     
     @IBAction func addWorkOutButtonPressed(_ sender: Any) {
-
         performSegue(withIdentifier: "goToAddActionVC", sender: self)
     }
-    
 }
 

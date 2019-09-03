@@ -8,13 +8,16 @@
 
 import UIKit
 
+protocol WorkoutTableViewCellDelegate {
+    func deleteButtonPressed(cell: WorkoutTableViewCell)
+    func editButtonPressed(cell: WorkoutTableViewCell)
+}
+
 class WorkoutTableViewCell: UITableViewCell {
     
-    //MARK:- Set up Properties
+    //MARK:- Setup Properties
     
-    var deleteDelegate: CustomDeleteDelegate?
-    var editDelegate:CustomEditDelegate?
-    
+    var delegate: WorkoutTableViewCellDelegate?
     
     @IBOutlet weak var trainingNameLabel: UILabel! {
         didSet {
@@ -30,15 +33,13 @@ class WorkoutTableViewCell: UITableViewCell {
         }
     }
     
-    //MARK:- Set up Handlers
+    //MARK:- Setup Handlers
     
     @IBAction func editTrainingButton(_ sender: Any) {
-        
-        editDelegate?.editButtonPressed(cell: self)
+        delegate?.editButtonPressed(cell: self)
     }
     
     @IBAction func deleteTrainingButton(_ sender: Any) {
-        
-        deleteDelegate?.deleteButtonPressed(cell: self)
+        delegate?.deleteButtonPressed(cell: self)
     }
 }

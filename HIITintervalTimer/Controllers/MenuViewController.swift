@@ -11,7 +11,7 @@ import SideMenu
 
 class MenuViewController: UIViewController {
 
-    //MARK:- Set up properties
+    //MARK:- Setup properties
     
     @IBOutlet weak var homeBtn: UIButton! {
         didSet {
@@ -39,14 +39,12 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = UIColor.black
         SideMenuManager.defaultManager.menuWidth = view.frame.width/1.3
         setUpNavigationBar()
     }
     
     func setUpNavigationBar() {
-        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.barTintColor = .black

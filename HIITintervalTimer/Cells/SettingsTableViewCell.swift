@@ -8,12 +8,15 @@
 
 import UIKit
 
+protocol SettingsTableViewCellDelegate {
+    func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool)
+}
+
 class SettingsTableViewCell: UITableViewCell {
 
-    //MARK:- Set up Properties
+    //MARK:- Setup Properties
     
-    var delegate: DidTapSettingsBtn?
-    
+    var delegate: SettingsTableViewCellDelegate?
     var didCheckKeepScreenOn = settings.keepScreenOn
     var didCheckPauseOn = settings.pauseOn
     var didCheckWormUp = settings.wormUp
@@ -28,15 +31,13 @@ class SettingsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var settingsButton: UIButton!
        
-    //MARK:- Set up Handlers
+    //MARK:- Setup Handlers
 
     @IBAction func settingsBtnPressed(_ sender: Any) {
-                
         didCheckKeepScreenOn = !didCheckKeepScreenOn
         didCheckPauseOn = !didCheckPauseOn
         didCheckWormUp = !didCheckWormUp
         didSoundOn = !didSoundOn
-        
         delegate?.didTapSettingsBtn(cell: self, didCheckKeepScreenOn: didCheckKeepScreenOn, didCheckPauseOn: didCheckPauseOn, didCheckWormUp: didCheckWormUp, didSoundOn: didSoundOn)
     }
 }

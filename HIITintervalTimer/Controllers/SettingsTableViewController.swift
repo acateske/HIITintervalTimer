@@ -12,27 +12,22 @@ import RealmSwift
 
 class SettingsTableViewController: UITableViewController {
 
-    //MARK:- Set up properties
+    //MARK:- Setup properties
     
     let realm = try! Realm()
-    
     var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "No sound", "Rate the app"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.backgroundColor = UIColor.black
         tableView.rowHeight = 94.0
-        
         title = "Settings"
         tableView.tableFooterView = UIView()
-        
        // print(Realm.Configuration.defaultConfiguration.fileURL)
-       
-        load()
+        loadSettingsData()
     }
     
-    // MARK: - Table view data source
+    // MARK: - TableView Data Source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsArray.count
@@ -40,8 +35,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableViewCell
         cell.delegate = self
         
         if indexPath.row == 0 {
@@ -85,7 +79,6 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func configureCell(with cell: SettingsTableViewCell, indexPath: IndexPath) {
-        
         cell.selectionStyle = .none
         cell.backgroundColor = .black
         cell.settingsButton.tag = indexPath.row
@@ -93,13 +86,11 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func configureActiveSettingsBtn(with cell: SettingsTableViewCell) {
-        
         cell.settingsButton.setBackgroundImage(UIImage(named: "rectangle65"), for: .normal)
         cell.settingsButton.setImage(UIImage(named: "check"), for: .normal)
     }
     
     func configureInActiveSettingsBtn(with cell: SettingsTableViewCell) {
-        
         cell.settingsButton.setBackgroundImage(UIImage(named: "rectangle68"), for: .normal)
         cell.settingsButton.setImage(UIImage(), for: .normal)
     }
@@ -107,7 +98,6 @@ class SettingsTableViewController: UITableViewController {
     //MARK: Rate The App
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                
         if indexPath.row == settingsArray.count - 1 {
             SKStoreReviewController.requestReview()
         }
@@ -115,8 +105,7 @@ class SettingsTableViewController: UITableViewController {
     
     //MARK:- Manipulating data
     
-    func load() {
-        
+    func loadSettingsData() {
         if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
             settings = settingsData
         } else {
@@ -133,14 +122,12 @@ class SettingsTableViewController: UITableViewController {
     }
 }
 
-//MARK:- Set up Protocols
+//MARK:- Setup Protocols
 
-extension SettingsTableViewController: DidTapSettingsBtn {
+extension SettingsTableViewController: SettingsTableViewCellDelegate {
     
     func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool) {
-        
         let cellTag = cell.settingsButton.tag
-        
         if cellTag == 0 {
             if didCheckKeepScreenOn {
                 configureActiveSettingsBtn(with: cell)

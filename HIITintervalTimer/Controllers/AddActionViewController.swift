@@ -9,12 +9,12 @@
 import UIKit
 import RealmSwift
 
-var colorForActionBtn = UIColor.neonYellow
-var colorForRestBtn = UIColor.neonRed
-
 class AddActionViewController: UIViewController {
 
-    //MARK: - Set up properties
+    //MARK: - Setup properties
+    
+    var colorForActionBtn = UIColor.neonYellow
+    var colorForRestBtn = UIColor.neonRed
     
     let realm = try! Realm()
     var timer: Timer?
@@ -109,13 +109,11 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func actionBtnColorPressed(_ sender: UIButton) {
-        
         handlerMoreAction(sender: sender.tag)
     }
     
     @IBAction func restBtnColorPressed(_ sender: UIButton) {
-        
-        handleMoreRest(sender: sender.tag)
+        handlerMoreAction(sender: sender.tag)
     }
     
     @IBOutlet weak var saveBarButton: UIBarButtonItem! {
@@ -160,10 +158,9 @@ class AddActionViewController: UIViewController {
        // print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
-    //MARK:- Set up Handlers
+    //MARK:- Setup Handlers
     
     @objc func handleLongPressGestureAddRestSeconds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddRestSeconds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -173,13 +170,11 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureAddRestSeconds() {
-        
         numberOfRestSeconds += 1
         restLabel.text = "\(numberOfRestSeconds) SECONDS"
     }
     
     @objc func handleLongPressGestureReduceRestSeconds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceRestSeconds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -189,7 +184,6 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureReduceRestSeconds() {
-        
         if numberOfRestSeconds > 0 {
             numberOfRestSeconds -= 1
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
@@ -198,7 +192,6 @@ class AddActionViewController: UIViewController {
     
     
     @objc func handleLongPressGestureAddActionSeconds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddActionSeconds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -208,13 +201,11 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureAddActionSeconds() {
-        
         numberOfActionSeconds += 1
         actionLabel.text = "\(numberOfActionSeconds) SECONDS"
     }
     
     @objc func handleLongPressGestureReduceActionSeconds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceActionSeconds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -224,7 +215,6 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureReduceActionSeconds() {
-        
         if numberOfActionSeconds > 0 {
             numberOfActionSeconds -= 1
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
@@ -233,7 +223,6 @@ class AddActionViewController: UIViewController {
     
     
     @objc func handleLongPressGestureAddRounds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureAddRounds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -243,13 +232,11 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureAddRounds() {
-        
         numberOfRounds += 1
         labelForRounds.text = "\(numberOfRounds) ROUNDS"
     }
     
     @objc func handleLongPressGestureReduceRounds(gesture: UILongPressGestureRecognizer) {
-        
         if gesture.state == .began {
             timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(handleGestureReduceRounds), userInfo: nil, repeats: true)
         } else if gesture.state == .ended || gesture.state == .cancelled {
@@ -259,7 +246,6 @@ class AddActionViewController: UIViewController {
     }
     
     @objc func handleGestureReduceRounds() {
-        
         if numberOfRounds > 0 {
             numberOfRounds -= 1
             labelForRounds.text = "\(numberOfRounds) ROUNDS"
@@ -268,21 +254,12 @@ class AddActionViewController: UIViewController {
     
     
     func handlerMoreAction(sender tag: Int) {
-        
         settingsLauncher.tag = tag
-        settingsLauncher.delegateActionColor = self
-        settingsLauncher.showSettings()
-    }
-    
-    func handleMoreRest(sender tag: Int) {
-        
-        settingsLauncher.tag = tag
-        settingsLauncher.delegateRestColor = self
+        settingsLauncher.delegate = self
         settingsLauncher.showSettings()
     }
     
     func updateView() {
-        
         if recivedRow != nil {
             let workout = workoutTrainings![recivedRow!]
             numberOfRounds = workout.numberOfRounds
@@ -292,12 +269,10 @@ class AddActionViewController: UIViewController {
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
             numberOfRestSeconds = workout.restSeconds
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
-           
             colorForActionBtn = UIColor(hexString: workout.colorAction)!
             colorForRestBtn = UIColor(hexString: workout.colorRest)!
             actionBtnColor.backgroundColor = colorForActionBtn
             restBtnColor.backgroundColor = colorForRestBtn
-            
             do {
                 try realm.write {
                     realm.delete(workout)
@@ -309,7 +284,6 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func saveBarButtonPressed(_ sender: UIBarButtonItem) {
-        
         if trainingNameTextField.text != "" && numberOfRounds != 0 && numberOfActionSeconds != 0 {
             saveAction()
             resetAction()
@@ -317,12 +291,10 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func addActionButtonPressed(_ sender: Any) {
-    
         performSegue(withIdentifier: "goToListOfWorkoutsVC", sender: self)
     }
     
     func saveAction() {
-        
         let workout = Workout()
         workout.nameOfTraining = trainingNameTextField.text!
         workout.numberOfRounds = numberOfRounds
@@ -341,17 +313,14 @@ class AddActionViewController: UIViewController {
     }
     
     func resetAction() {
-        
         numberOfRounds = 0
         numberOfRestSeconds = 0
         numberOfActionSeconds = 0
         totalTime = 0
-        
         colorForRestBtn = UIColor.neonRed
         colorForActionBtn = UIColor.neonYellow
         actionBtnColor.backgroundColor = colorForActionBtn
         restBtnColor.backgroundColor = colorForRestBtn
-        
         trainingNameTextField.text = ""
         labelForRounds.text = "0 ROUNDS"
         actionLabel.text = "0 SECONDS"
@@ -359,13 +328,11 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func addButtonRounds(_ sender: Any) {
-        
         numberOfRounds += 1
         labelForRounds.text = "\(numberOfRounds) ROUNDS"
     }
     
     @IBAction func reduceButtonRounds(_ sender: Any) {
-        
         if numberOfRounds > 0 {
             numberOfRounds -= 1
             labelForRounds.text = "\(numberOfRounds) ROUNDS"
@@ -373,13 +340,11 @@ class AddActionViewController: UIViewController {
     }
     
     @IBAction func addActionSecondsBtn(_ sender: Any) {
-        
         numberOfActionSeconds += 1
         actionLabel.text = "\(numberOfActionSeconds) SECONDS"
     }
     
     @IBAction func reduceActionSecondsBtn(_ sender: Any) {
-        
         if numberOfActionSeconds > 0 {
             numberOfActionSeconds -= 1
             actionLabel.text = "\(numberOfActionSeconds) SECONDS"
@@ -389,11 +354,9 @@ class AddActionViewController: UIViewController {
         
         numberOfRestSeconds += 1
         restLabel.text = "\(numberOfRestSeconds) SECONDS"
-        
     }
     
     @IBAction func reduceRestSecondsBtn(_ sender: Any) {
-        
         if numberOfRestSeconds > 0 {
             numberOfRestSeconds -= 1
             restLabel.text = "\(numberOfRestSeconds) SECONDS"
@@ -401,7 +364,7 @@ class AddActionViewController: UIViewController {
     }
 }
 
-//MARK:- Set up TextFieldDelegate Method
+//MARK:- Setup TextFieldDelegate Method
 
 extension AddActionViewController: UITextFieldDelegate {
     
@@ -410,21 +373,17 @@ extension AddActionViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         trainingNameTextField.resignFirstResponder()
         return true
     }
 }
 
-extension AddActionViewController: ChangeColorRest {
+extension AddActionViewController: SettingsLauncherDelegate {
     
     func changeColorRest(with color: UIColor) {
         colorForRestBtn = color
         restBtnColor.backgroundColor = colorForRestBtn
     }
-}
-
-extension AddActionViewController: ChangeColorAction {
     
     func changeColorAction(with color: UIColor) {
         colorForActionBtn = color
