@@ -13,12 +13,12 @@ class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Setup properties
     
-    let realm = try! Realm()
-    var selectedRow: Int?
+    private let realm = try! Realm()
+    private var selectedRow: Int?
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
         didSet {
-            doneBarButton.title = "DONE"
+            doneBarButton.title = Constants.Names.done
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
         }
@@ -48,7 +48,7 @@ class ListOfWorkoutsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
-        title = "WORKOUTS"
+        title = Constants.Names.workouts
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
@@ -62,7 +62,7 @@ class ListOfWorkoutsViewController: UIViewController {
     }
 }
 
-//MARK:- Setup DataSource Methods
+//MARK:- UITableViewDataSource
 
 extension ListOfWorkoutsViewController: UITableViewDataSource {
     
@@ -96,7 +96,30 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     }
 }
 
-//MARK:- Setup Protocol Methods
+//MARK:- UITableViewDelegate
+
+extension ListOfWorkoutsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "gotoTrainingVC", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoTrainingVC" {
+            if let trainingVC = segue.destination as? TrainingViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    trainingVC.selectedTraining = indexPath.row
+                }
+            }
+        } else if segue.identifier == "goBackToAddAction" {
+            if let actionVC = segue.destination as? AddActionViewController {
+                actionVC.recivedRow = selectedRow
+            }
+        }
+    }
+}
+
+//MARK:- WorkoutTableViewCellDelegate
 
 extension ListOfWorkoutsViewController: WorkoutTableViewCellDelegate {
     
@@ -118,28 +141,5 @@ extension ListOfWorkoutsViewController: WorkoutTableViewCellDelegate {
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         selectedRow = index
         performSegue(withIdentifier: "goBackToAddAction", sender: self)
-    }
-}
-
-//MARK:- Setup Delegate Method
-
-extension ListOfWorkoutsViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "gotoTrainingVC", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoTrainingVC" {
-            if let trainingVC = segue.destination as? TrainingViewController {
-                if let indexPath = tableView.indexPathForSelectedRow {
-                    trainingVC.selectedTraining = indexPath.row
-                }
-            }
-        } else if segue.identifier == "goBackToAddAction" {
-            if let actionVC = segue.destination as? AddActionViewController {
-                actionVC.recivedRow = selectedRow
-            }
-        }
     }
 }

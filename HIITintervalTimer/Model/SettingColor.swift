@@ -8,17 +8,6 @@
 
 import UIKit
 
-//class SettingColor {
-//
-//    let name: String
-//    let color: UIColor
-//
-//    init(name: String, color: UIColor) {
-//        self.name = name
-//        self.color = color
-//    }
-//}
-
 struct SettingColor {
     
     let name: String

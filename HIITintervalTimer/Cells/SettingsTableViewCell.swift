@@ -17,10 +17,10 @@ class SettingsTableViewCell: UITableViewCell {
     //MARK:- Setup Properties
     
     var delegate: SettingsTableViewCellDelegate?
-    var didCheckKeepScreenOn = settings.keepScreenOn
-    var didCheckPauseOn = settings.pauseOn
-    var didCheckWormUp = settings.wormUp
-    var didSoundOn = settings.sound
+    private var didCheckKeepScreenOn = settings.keepScreenOn
+    private var didCheckPauseOn = settings.pauseOn
+    private var didCheckWormUp = settings.wormUp
+    private var didSoundOn = settings.sound
     
     @IBOutlet weak var settingsLabel: UILabel! {
         didSet {

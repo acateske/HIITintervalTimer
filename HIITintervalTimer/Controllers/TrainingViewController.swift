@@ -14,30 +14,31 @@ class TrainingViewController: UIViewController {
     
     //MARK:- Setup properties
     
-    let realm = try! Realm()
-    var player: AVAudioPlayer?
-    var cool = false
-    var round = 1
-    var seconds = 0
-    var timer = Timer()
-    var timer2 = Timer()
-    var secForWormUp = 10
-    var wormUp = settings.wormUp
-    var soundOn = settings.sound
-    var selectedTraining: Int?
-    var numberOfRounds = 0
-    var totalTime = 0.0
-    var action = 0
-    var rest = 0
+    private let realm = try! Realm()
+    private var player: AVAudioPlayer?
+    private var cool = false
+    private var round = 1
+    private var seconds = 0
+    private var timer = Timer()
+    private var timer2 = Timer()
+    private var secForWormUp = 10
+    private var wormUp = settings.wormUp
+    private var soundOn = settings.sound
+    private var numberOfRounds = 0
+    private var totalTime = 0.0
+    private var action = 0
+    private var rest = 0
     var colorForRest = ""
     var colorForAction = ""
+    var selectedTraining: Int?
+
     
     @IBOutlet weak var totalTimeLabel: UILabel! {
         didSet {
             totalTimeLabel.textAlignment = .center
             totalTimeLabel.textColor = UIColor.white
             totalTimeLabel.font = UIFont.textStyle
-            totalTimeLabel.text = "Total Time Left: 00:00:00"
+            totalTimeLabel.text = Constants.Names.totalTimeLeft
         }
     }
     
@@ -98,7 +99,7 @@ class TrainingViewController: UIViewController {
          NotificationCenter.default.addObserver(self, selector: #selector(appResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
-    @objc func appResignActive() {
+    @objc private func appResignActive() {
         if settings.pauseOn {
             timer.invalidate()
             timer2.invalidate()
@@ -106,7 +107,7 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    func updateView() {
+    private func updateView() {
         guard let selectedTraining = selectedTraining else {fatalError()}
         guard let workout = workoutTrainings?[selectedTraining] else {fatalError()}
         title = workout.nameOfTraining
@@ -139,11 +140,11 @@ class TrainingViewController: UIViewController {
     
     //MARK:- Setup AVAudio player
     
-    let soundReady = "451270__alivvie__ready"
-    let soundRest = "108889__tim-kahn__rest"
-    let soundFinished = "34943__sir-yaro__finished"
+    let soundReady = Constants.Sounds.soundReady
+    let soundRest = Constants.Sounds.soundRest
+    let soundFinished = Constants.Sounds.soundFinished
     
-    func playSound(with sound: String, extensionn: String = "wav", soundOn: Bool) {
+    private func playSound(with sound: String, extensionn: String = "wav", soundOn: Bool) {
         if !soundOn {
             guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
             do {
@@ -158,20 +159,20 @@ class TrainingViewController: UIViewController {
     
     //MARK: Setup Timer Methods
     
-    func runTimer() {
+    private func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
-    func runTimer2() {
+    private func runTimer2() {
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerForPreparation), userInfo: nil, repeats: true)
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         timerWorking()
         timerTotalTime()
     }
     
-    @objc func timerForPreparation() {
+    @objc private func timerForPreparation() {
         if secForWormUp <= 1 {
             wormUp = false
             timer2.invalidate()
@@ -187,7 +188,7 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    func timerWorking() {
+    private func timerWorking() {
         if cool {
             if seconds <= 1 && round != numberOfRounds && action > 0 {
                 cool = false
@@ -244,7 +245,7 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    func timerTotalTime() {
+    private func timerTotalTime() {
         if totalTime < 1 {
             timer.invalidate()
         } else {
@@ -275,14 +276,14 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    func timeStringTotalTime(time: TimeInterval) -> String {
+    private func timeStringTotalTime(time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return "Total Time Left: " + String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
     
-    func timeStringWorkingTime(time: TimeInterval) -> String {
+    private func timeStringWorkingTime(time: TimeInterval) -> String {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i", minutes, seconds)

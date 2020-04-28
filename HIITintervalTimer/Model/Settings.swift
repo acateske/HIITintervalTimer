@@ -24,13 +24,3 @@ class Settings: Object {
 
 var settings = Settings()
 
-
-//class Settings {
-//    static let shared = Settings()
-//    var keepScreenOn: Bool = false
-//    var pauseOn: Bool = false
-//    var wormUp: Bool = false
-//    var pauseOnIncommingCall = false
-//    var preparation = false
-//}
-

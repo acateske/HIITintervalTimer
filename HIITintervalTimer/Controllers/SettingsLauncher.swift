@@ -9,29 +9,28 @@
 import UIKit
 
 protocol SettingsLauncherDelegate {
-    
-    func changeColorAction(with color: UIColor)
-    func changeColorRest(with color: UIColor)
+    func changeColorAction(_ settingsLauncher: SettingsLauncher, with color: UIColor)
+    func changeColorRest(_ settingsLauncher: SettingsLauncher, with color: UIColor)
 }
 
-class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SettingsLauncher: NSObject {
    
     //MARK: - Setup properties
     
     var delegate: SettingsLauncherDelegate?
     var tag: Int?
-    let blackView = UIView()
-    let cellID = "CellID"
-    let cellHeight: CGFloat = 50
+    private let blackView = UIView()
+    private let cellID = Constants.Names.cellID
+    private let cellHeight = Constants.Dimension.cellHeight
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
         return cv
     }()
     
-    public let settingColors: [SettingColor] = {
+    private let settingColors: [SettingColor] = {
         return [SettingColor(name: "GREEN", color: UIColor.spearmint),
                 SettingColor(name: "YELLOW", color: UIColor.neonYellow),
                 SettingColor(name: "RED", color: UIColor.neonRed),
@@ -41,7 +40,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
     
     //MARK: - Setup handlers
     
-    func showSettings(){
+     func showSettings(){
         if let window = UIApplication.shared.keyWindow {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
@@ -59,7 +58,7 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         }
     }
     
-    @objc func handleDismiss() {
+    @objc private func handleDismiss() {
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
             if let window = UIApplication.shared.keyWindow {
@@ -76,8 +75,11 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         collectionView.delegate = self
         collectionView.register(SettingColorCell.self, forCellWithReuseIdentifier: cellID)
     }
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     
-    //MARK: - Setup Data source and Delegate methods
+}
+extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return settingColors.count
@@ -108,9 +110,9 @@ class SettingsLauncher: NSObject, UICollectionViewDelegate, UICollectionViewData
         }) { (completed: Bool) in
             let selectedColor = self.settingColors[indexPath.item].color
             if self.tag == 1 {
-                self.delegate?.changeColorAction(with: selectedColor)
+                self.delegate?.changeColorAction(self, with: selectedColor)
             } else if self.tag == 2 {
-                self.delegate?.changeColorRest(with: selectedColor)
+                self.delegate?.changeColorRest(self, with: selectedColor)
             }
         }
     }

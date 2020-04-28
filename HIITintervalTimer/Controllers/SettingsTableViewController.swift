@@ -10,24 +10,27 @@ import UIKit
 import StoreKit
 import RealmSwift
 
+
+
 class SettingsTableViewController: UITableViewController {
 
-    //MARK:- Setup properties
+//MARK:- Setup properties
     
-    let realm = try! Realm()
-    var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "No sound", "Rate the app"]
+    private let realm = try! Realm()
+    private var settingsArray = ["Keep screen on", "Pause on incoming calls", "Preparation time 10 sec", "No sound", "Rate the app"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.backgroundColor = UIColor.black
         tableView.rowHeight = 94.0
-        title = "Settings"
+        title = Constants.Names.settings
         tableView.tableFooterView = UIView()
        // print(Realm.Configuration.defaultConfiguration.fileURL)
         loadSettingsData()
     }
     
-    // MARK: - TableView Data Source
+// MARK: - TableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsArray.count
@@ -78,24 +81,24 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func configureCell(with cell: SettingsTableViewCell, indexPath: IndexPath) {
+    private func configureCell(with cell: SettingsTableViewCell, indexPath: IndexPath) {
         cell.selectionStyle = .none
         cell.backgroundColor = .black
         cell.settingsButton.tag = indexPath.row
         cell.settingsLabel.text = settingsArray[indexPath.row]
     }
     
-    func configureActiveSettingsBtn(with cell: SettingsTableViewCell) {
+    private func configureActiveSettingsBtn(with cell: SettingsTableViewCell) {
         cell.settingsButton.setBackgroundImage(UIImage(named: "rectangle65"), for: .normal)
         cell.settingsButton.setImage(UIImage(named: "check"), for: .normal)
     }
     
-    func configureInActiveSettingsBtn(with cell: SettingsTableViewCell) {
+    private func configureInActiveSettingsBtn(with cell: SettingsTableViewCell) {
         cell.settingsButton.setBackgroundImage(UIImage(named: "rectangle68"), for: .normal)
         cell.settingsButton.setImage(UIImage(), for: .normal)
     }
     
-    //MARK: Rate The App
+//MARK: RateTheApp
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == settingsArray.count - 1 {
@@ -103,16 +106,16 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    //MARK:- Manipulating data
+//MARK:- Manipulating Data
     
-    func loadSettingsData() {
+    private func loadSettingsData() {
         if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
             settings = settingsData
         } else {
             do {
                 try realm.write {
                     settings.yourPrimaryKey = 0
-                    realm.add(settings, update: true)
+                    realm.add(settings, update: .all)
                 }
             } catch {
                 print("Error", error.localizedDescription)
@@ -122,13 +125,15 @@ class SettingsTableViewController: UITableViewController {
     }
 }
 
-//MARK:- Setup Protocols
+//MARK:- SettingsTableViewCellDelegate
 
 extension SettingsTableViewController: SettingsTableViewCellDelegate {
     
     func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool) {
         let cellTag = cell.settingsButton.tag
-        if cellTag == 0 {
+        
+        switch cellTag {
+        case 0:
             if didCheckKeepScreenOn {
                 configureActiveSettingsBtn(with: cell)
                 do {
@@ -146,11 +151,11 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.keepScreenOn = didCheckKeepScreenOn
                     }
                 } catch {
-                    print("error")
+                    print("error",error.localizedDescription)
                 }
                 UIApplication.shared.isIdleTimerDisabled = didCheckKeepScreenOn
             }
-        } else if cellTag == 1 {
+        case 1:
             if didCheckPauseOn {
                 configureActiveSettingsBtn(with: cell)
                 do {
@@ -158,7 +163,7 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.pauseOn = didCheckPauseOn
                     }
                 } catch {
-                    print("error")
+                    print("error",error.localizedDescription)
                 }
             } else {
                 configureInActiveSettingsBtn(with: cell)
@@ -167,10 +172,10 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.pauseOn = didCheckPauseOn
                     }
                 } catch {
-                    print("error")
+                    print("error", error.localizedDescription)
                 }
             }
-        } else if cellTag == 2 {
+        case 2:
             if didCheckWormUp {
                 configureActiveSettingsBtn(with: cell)
                 do {
@@ -178,7 +183,7 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.wormUp = didCheckWormUp
                     }
                 } catch {
-                    print("error")
+                    print("error", error.localizedDescription)
                 }
             } else {
                 configureInActiveSettingsBtn(with: cell)
@@ -187,10 +192,10 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.wormUp = didCheckWormUp
                     }
                 } catch {
-                    print("error")
+                    print("error", error.localizedDescription)
                 }
             }
-        } else if cellTag == 3 {
+        case 3:
             if didSoundOn {
                 configureActiveSettingsBtn(with: cell)
                 do {
@@ -198,7 +203,7 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.sound = didSoundOn
                     }
                 } catch {
-                    print("error")
+                    print("error", error.localizedDescription)
                 }
             } else {
                 configureInActiveSettingsBtn(with: cell)
@@ -207,11 +212,11 @@ extension SettingsTableViewController: SettingsTableViewCellDelegate {
                         settings.sound = didSoundOn
                     }
                 } catch {
-                    print("error")
+                    print("error", error.localizedDescription)
                 }
             }
-        } else {
-            print("Nothing to show")
+        default:
+            break
         }
     }
 }

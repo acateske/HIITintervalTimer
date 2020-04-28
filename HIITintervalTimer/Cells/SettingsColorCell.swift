@@ -24,14 +24,14 @@ class SettingColorCell: UICollectionViewCell {
         }
     }
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Test"
         label.font = UIFont.textStyle5
         return label
     }()
     
-    let colorView: UIView = {
+    private let colorView: UIView = {
         let view = UIView()
         if let window = UIApplication.shared.keyWindow {
             view.frame = CGRect(x: window.frame.width - 50, y: 10, width: 30, height: 30)

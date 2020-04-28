@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		6C112393222B28F8003FF910 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C112392222B28F8003FF910 /* Workout.swift */; };
 		6C1175B4221DFA5100D81388 /* BebasNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */; };
 		6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */; };
+		6C5883712454DE2700A46411 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5883702454DE2700A46411 /* Constants.swift */; };
 		6C8F90112252C5AD001C5ABB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F90102252C5AD001C5ABB /* SettingsTableViewCell.swift */; };
 		6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905530224FCCA9003324CA /* MenuViewController.swift */; };
 		6C905535224FE844003324CA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905534224FE844003324CA /* SettingsTableViewController.swift */; };
@@ -44,6 +45,7 @@
 		6C112392222B28F8003FF910 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Bold.ttf"; sourceTree = "<group>"; };
 		6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionViewController.swift; sourceTree = "<group>"; };
+		6C5883702454DE2700A46411 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6C8F90102252C5AD001C5ABB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		6C905530224FCCA9003324CA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6C905534224FE844003324CA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CB6BCC6221C7B6A00C6EE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CB6BCC8221C7B6A00C6EE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Additions.swift"; path = "HIITintervalTimer/SupportingFiles/UIFont+Additions.swift"; sourceTree = SOURCE_ROOT; };
+		6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Additions.swift"; path = "HIITintervalTimer/SupportingFiles/Fonts/UIFont+Additions.swift"; sourceTree = SOURCE_ROOT; };
 		6CB6BCD0221C818600C6EE34 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Additions.swift"; path = "HIITintervalTimer/SupportingFiles/UIColor+Additions.swift"; sourceTree = SOURCE_ROOT; };
 		A6CC4E5D318F50EFEE0E1F98 /* Pods_HIITintervalTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HIITintervalTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,19 +146,36 @@
 		6C1091E82223419400273BA3 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				6C4E3DA124561BD6006668BE /* Sounds */,
+				6C4E3DA024561BA8006668BE /* Fonts */,
+				6C5883702454DE2700A46411 /* Constants.swift */,
 				6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */,
-				6C98F27822569B0B00BE59F1 /* beep-30b.wav */,
-				6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */,
-				6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */,
-				6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */,
-				6C98F27622569AF200BE59F1 /* beep-29.wav */,
 				6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */,
 				6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6C4E3DA024561BA8006668BE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
 				6CB6BCCE221C80DB00C6EE34 /* UIFont+Additions.swift */,
 				6CB6BCD0221C818600C6EE34 /* BebasNeue-Regular.ttf */,
 				6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */,
 			);
-			path = SupportingFiles;
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6C4E3DA124561BD6006668BE /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */,
+				6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */,
+				6C98F27622569AF200BE59F1 /* beep-29.wav */,
+				6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */,
+				6C98F27822569B0B00BE59F1 /* beep-30b.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		6CB6BCB0221C7B6900C6EE34 = {
@@ -296,22 +315,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HIITintervalTimer/Pods-HIITintervalTimer-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HIITintervalTimer/Pods-HIITintervalTimer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-HIITintervalTimer/Pods-HIITintervalTimer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -326,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */,
+				6C5883712454DE2700A46411 /* Constants.swift in Sources */,
 				6C0F8B322235AFAF0083F98E /* TrainingViewController.swift in Sources */,
 				6C8F90112252C5AD001C5ABB /* SettingsTableViewCell.swift in Sources */,
 				6C9ABE3B22C2A96F00409189 /* SettingsColorCell.swift in Sources */,
@@ -417,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -472,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
