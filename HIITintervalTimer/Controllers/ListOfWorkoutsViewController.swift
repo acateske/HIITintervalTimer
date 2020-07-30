@@ -12,13 +12,13 @@ import RealmSwift
 class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Setup properties
-    
+
     private let realm = try! Realm()
     private var selectedRow: Int?
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
         didSet {
-            doneBarButton.title = Constants.Names.done
+            doneBarButton.title = K.Names.done
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
         }
@@ -37,7 +37,7 @@ class ListOfWorkoutsViewController: UIViewController {
         didSet {
             addWorkoutButton.isEnabled = false
             addWorkoutButton.isOpaque = true
-            addWorkoutButton.setTitle("ADD WORKOUT", for: .normal)
+            addWorkoutButton.setTitle(K.Names.addWorkout, for: .normal)
             addWorkoutButton.titleLabel?.font = UIFont.textStyle9
             addWorkoutButton.tintColor = UIColor.black
         }
@@ -48,7 +48,7 @@ class ListOfWorkoutsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
-        title = Constants.Names.workouts
+        title = K.Names.workouts
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
@@ -71,7 +71,7 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as! WorkoutTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.listOfWorkoutVcCell, for: indexPath) as! WorkoutwCell
         cell.backgroundColor = UIColor.black
         cell.selectionStyle = .none
         cell.delegate = self
@@ -96,22 +96,22 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     }
 }
 
-//MARK:- UITableViewDelegate
+//MARK:- UITableViewDelegate Methods
 
 extension ListOfWorkoutsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "gotoTrainingVC", sender: self)
+        performSegue(withIdentifier: K.Seque.trainingVC, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoTrainingVC" {
+        if segue.identifier == K.Seque.trainingVC {
             if let trainingVC = segue.destination as? TrainingViewController {
                 if let indexPath = tableView.indexPathForSelectedRow {
                     trainingVC.selectedTraining = indexPath.row
                 }
             }
-        } else if segue.identifier == "goBackToAddAction" {
+        } else if segue.identifier == K.Seque.addActionVC {
             if let actionVC = segue.destination as? AddActionViewController {
                 actionVC.recivedRow = selectedRow
             }
@@ -121,9 +121,9 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
 
 //MARK:- WorkoutTableViewCellDelegate
 
-extension ListOfWorkoutsViewController: WorkoutTableViewCellDelegate {
+extension ListOfWorkoutsViewController: WorkoutCellDelegate {
     
-    func deleteButtonPressed(cell: WorkoutTableViewCell) {
+    func deleteButtonPressed(cell: WorkoutwCell) {
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         if let workout = workoutTrainings?[index] {
             do {
@@ -137,9 +137,9 @@ extension ListOfWorkoutsViewController: WorkoutTableViewCellDelegate {
         }
     }
     
-    func editButtonPressed(cell: WorkoutTableViewCell) {
+    func editButtonPressed(cell: WorkoutwCell) {
         guard let index = tableView.indexPath(for: cell)?.row else {return}
         selectedRow = index
-        performSegue(withIdentifier: "goBackToAddAction", sender: self)
+        performSegue(withIdentifier: K.Seque.addActionVC, sender: self)
     }
 }

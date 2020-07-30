@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol SettingsTableViewCellDelegate {
-    func didTapSettingsBtn(cell: SettingsTableViewCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool)
+protocol SettingsCellDelegate {
+    func didTapSettingsBtn(cell: SettingsCell, didCheckKeepScreenOn: Bool, didCheckPauseOn: Bool, didCheckWormUp: Bool, didSoundOn: Bool)
 }
 
-class SettingsTableViewCell: UITableViewCell {
+class SettingsCell: UITableViewCell {
 
     //MARK:- Setup Properties
     
-    var delegate: SettingsTableViewCellDelegate?
+    var delegate: SettingsCellDelegate?
     private var didCheckKeepScreenOn = settings.keepScreenOn
     private var didCheckPauseOn = settings.pauseOn
     private var didCheckWormUp = settings.wormUp
@@ -28,7 +28,6 @@ class SettingsTableViewCell: UITableViewCell {
             settingsLabel.font = UIFont.textStyle7
         }
     }
-    
     @IBOutlet weak var settingsButton: UIButton!
        
     //MARK:- Setup Handlers

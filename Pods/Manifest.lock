@@ -11,7 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
-  - RealmSwift (~> 3.20.0)
+  - RealmSwift
   - SideMenu
 
 SPEC REPOS:
@@ -35,6 +35,6 @@ SPEC CHECKSUMS:
   RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
 
-PODFILE CHECKSUM: 405e94da2d947a9ce6e581abc7d16b7e33eddb35
+PODFILE CHECKSUM: 0e7133066b9ff4f77eecf99e7ebe9d1f723f2c4e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

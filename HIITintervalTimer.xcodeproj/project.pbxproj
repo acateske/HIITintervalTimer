@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		6C0D5C852229E5AC0037C491 /* ListOfWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0D5C842229E5AC0037C491 /* ListOfWorkoutsViewController.swift */; };
-		6C0D5C872229ED390037C491 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0D5C862229ED390037C491 /* WorkoutTableViewCell.swift */; };
+		6C0D5C872229ED390037C491 /* WorkoutwCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0D5C862229ED390037C491 /* WorkoutwCell.swift */; };
 		6C0F8B322235AFAF0083F98E /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F8B312235AFAF0083F98E /* TrainingViewController.swift */; };
 		6C112393222B28F8003FF910 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C112392222B28F8003FF910 /* Workout.swift */; };
 		6C1175B4221DFA5100D81388 /* BebasNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */; };
 		6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */; };
-		6C5883712454DE2700A46411 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5883702454DE2700A46411 /* Constants.swift */; };
-		6C8F90112252C5AD001C5ABB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F90102252C5AD001C5ABB /* SettingsTableViewCell.swift */; };
+		6C5883712454DE2700A46411 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5883702454DE2700A46411 /* K.swift */; };
+		6C8F90112252C5AD001C5ABB /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F90102252C5AD001C5ABB /* SettingsCell.swift */; };
 		6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905530224FCCA9003324CA /* MenuViewController.swift */; };
 		6C905535224FE844003324CA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905534224FE844003324CA /* SettingsTableViewController.swift */; };
 		6C9288652254138C001463BE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9288642254138C001463BE /* Settings.swift */; };
@@ -40,13 +40,13 @@
 /* Begin PBXFileReference section */
 		628551B5205E014A064C8768 /* Pods-HIITintervalTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HIITintervalTimer.release.xcconfig"; path = "Target Support Files/Pods-HIITintervalTimer/Pods-HIITintervalTimer.release.xcconfig"; sourceTree = "<group>"; };
 		6C0D5C842229E5AC0037C491 /* ListOfWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWorkoutsViewController.swift; sourceTree = "<group>"; };
-		6C0D5C862229ED390037C491 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
+		6C0D5C862229ED390037C491 /* WorkoutwCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutwCell.swift; sourceTree = "<group>"; };
 		6C0F8B312235AFAF0083F98E /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		6C112392222B28F8003FF910 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		6C1175B3221DFA4C00D81388 /* BebasNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Bold.ttf"; sourceTree = "<group>"; };
 		6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionViewController.swift; sourceTree = "<group>"; };
-		6C5883702454DE2700A46411 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		6C8F90102252C5AD001C5ABB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		6C5883702454DE2700A46411 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		6C8F90102252C5AD001C5ABB /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		6C905530224FCCA9003324CA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6C905534224FE844003324CA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		6C9288642254138C001463BE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -104,8 +104,8 @@
 		6C0F8B302235A6350083F98E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6C0D5C862229ED390037C491 /* WorkoutTableViewCell.swift */,
-				6C8F90102252C5AD001C5ABB /* SettingsTableViewCell.swift */,
+				6C0D5C862229ED390037C491 /* WorkoutwCell.swift */,
+				6C8F90102252C5AD001C5ABB /* SettingsCell.swift */,
 				6C9ABE3A22C2A96F00409189 /* SettingsColorCell.swift */,
 			);
 			path = Cells;
@@ -148,7 +148,7 @@
 			children = (
 				6C4E3DA124561BD6006668BE /* Sounds */,
 				6C4E3DA024561BA8006668BE /* Fonts */,
-				6C5883702454DE2700A46411 /* Constants.swift */,
+				6C5883702454DE2700A46411 /* K.swift */,
 				6CEEAA6C221C8D0F0025978C /* UIColor+Additions.swift */,
 				6CB6BCC3221C7B6A00C6EE34 /* Assets.xcassets */,
 				6CB6BCC5221C7B6A00C6EE34 /* LaunchScreen.storyboard */,
@@ -334,9 +334,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */,
-				6C5883712454DE2700A46411 /* Constants.swift in Sources */,
+				6C5883712454DE2700A46411 /* K.swift in Sources */,
 				6C0F8B322235AFAF0083F98E /* TrainingViewController.swift in Sources */,
-				6C8F90112252C5AD001C5ABB /* SettingsTableViewCell.swift in Sources */,
+				6C8F90112252C5AD001C5ABB /* SettingsCell.swift in Sources */,
 				6C9ABE3B22C2A96F00409189 /* SettingsColorCell.swift in Sources */,
 				6CB6BCBF221C7B6900C6EE34 /* HomeViewController.swift in Sources */,
 				6C9288652254138C001463BE /* Settings.swift in Sources */,
@@ -348,7 +348,7 @@
 				6C9ABE3922C2A5E200409189 /* SettingColor.swift in Sources */,
 				6C9ABE3722C29B9100409189 /* SettingsLauncher.swift in Sources */,
 				6CB6BCCF221C80DB00C6EE34 /* UIFont+Additions.swift in Sources */,
-				6C0D5C872229ED390037C491 /* WorkoutTableViewCell.swift in Sources */,
+				6C0D5C872229ED390037C491 /* WorkoutwCell.swift in Sources */,
 				6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

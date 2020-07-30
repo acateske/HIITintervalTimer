@@ -20,8 +20,8 @@ class SettingsLauncher: NSObject {
     var delegate: SettingsLauncherDelegate?
     var tag: Int?
     private let blackView = UIView()
-    private let cellID = Constants.Names.cellID
-    private let cellHeight = Constants.Dimension.cellHeight
+    private let cellID = K.Names.cellID
+    private let cellHeight = K.Dimension.cellHeight
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,11 +31,11 @@ class SettingsLauncher: NSObject {
     }()
     
     private let settingColors: [SettingColor] = {
-        return [SettingColor(name: "GREEN", color: UIColor.spearmint),
-                SettingColor(name: "YELLOW", color: UIColor.neonYellow),
-                SettingColor(name: "RED", color: UIColor.neonRed),
-                SettingColor(name: "ORANGE", color: UIColor.reddishOrange),
-                SettingColor(name: "PINK", color: UIColor.purple)]
+        return [SettingColor(name: K.ColorName.green, color: UIColor.spearmint),
+                SettingColor(name: K.ColorName.yellow, color: UIColor.neonYellow),
+                SettingColor(name: K.ColorName.red, color: UIColor.neonRed),
+                SettingColor(name: K.ColorName.orange, color: UIColor.reddishOrange),
+                SettingColor(name: K.ColorName.pink, color: UIColor.purple)]
     }()
     
     //MARK: - Setup handlers
@@ -75,11 +75,11 @@ class SettingsLauncher: NSObject {
         collectionView.delegate = self
         collectionView.register(SettingColorCell.self, forCellWithReuseIdentifier: cellID)
     }
-
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-    
 }
-extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+//MARK: - UICollectionViewDataSource Methods
+
+extension SettingsLauncher: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return settingColors.count
@@ -100,7 +100,12 @@ extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+}
+
+//MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout Methods
+
+extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0

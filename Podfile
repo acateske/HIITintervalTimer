@@ -11,7 +11,7 @@ target 'HIITintervalTimer' do
 	use_frameworks!
 
 	pod 'SideMenu'
-	pod 'RealmSwift', '~> 3.20.0'
-        pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+	pod 'RealmSwift'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
 end

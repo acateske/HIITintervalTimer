@@ -15,21 +15,21 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var homeBtn: UIButton! {
         didSet {
-            homeBtn.setTitle("Home", for: .normal)
+            homeBtn.setTitle(K.Names.home, for: .normal)
             homeBtn.tintColor = UIColor.white
             homeBtn.titleLabel?.font = UIFont.textStyle11
         }
     }
     @IBOutlet weak var workoutsBtn: UIButton! {
         didSet {
-            workoutsBtn.setTitle("Workouts", for: .normal)
+            workoutsBtn.setTitle(K.Names.workouts, for: .normal)
             workoutsBtn.tintColor = UIColor.white
             workoutsBtn.titleLabel?.font = UIFont.textStyle11
         }
     }
     @IBOutlet weak var settingsBtn: UIButton! {
         didSet {
-            settingsBtn.setTitle("Settings", for: .normal)
+            settingsBtn.setTitle(K.Names.settings, for: .normal)
             settingsBtn.tintColor = UIColor.white
             settingsBtn.titleLabel?.font = UIFont.textStyle11
         }

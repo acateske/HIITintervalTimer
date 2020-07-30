@@ -12,9 +12,7 @@ import SideMenu
 class HomeViewController: UIViewController {
 
     //MARK: - Setup properties
-    
-    private var goToAddActionVC = "goToAddActionVC"
-    
+        
     @IBOutlet weak var addWorkOutButton: UIButton!
     @IBOutlet weak var label: UILabel! 
     
@@ -34,12 +32,12 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.barStyle = .black
-        title = Constants.Names.workouts
+        title = K.Names.workouts
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.textStyle, NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @IBAction func addWorkOutButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: goToAddActionVC, sender: self)
+        performSegue(withIdentifier: K.Seque.addActionVC, sender: self)
     }
 }
 

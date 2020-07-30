@@ -10,6 +10,8 @@ import UIKit
 
 class SettingColorCell: UICollectionViewCell {
     
+    //MARK: - Setup properties
+    
     var setting: SettingColor? {
         didSet {
             nameLabel.text = setting?.name
@@ -26,7 +28,7 @@ class SettingColorCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Test"
+        label.text = K.Names.settingsLabel
         label.font = UIFont.textStyle5
         return label
     }()
@@ -41,6 +43,8 @@ class SettingColorCell: UICollectionViewCell {
         }
         return view
     }()
+    
+    //MARK: - View
     
     override init(frame: CGRect) {
         super.init(frame: frame)
