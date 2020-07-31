@@ -12,7 +12,7 @@ import RealmSwift
 class AddActionViewController: UIViewController {
 
     //MARK: - Setup properties
-    
+
     var recivedRow: Int?
     private var timer: Timer?
     private let realm = try! Realm()
@@ -33,84 +33,20 @@ class AddActionViewController: UIViewController {
     @IBOutlet weak var trainingNameTextField: UITextField! 
     @IBOutlet weak var actionBtnColor: UIButton!
     @IBOutlet weak var restBtnColor: UIButton!
-    
-    @IBOutlet weak var restLabel: UILabel! {
-        didSet {
-            restLabel.text = K.Names.startSeconds
-            restLabel.textAlignment = .center
-            restLabel.font = UIFont.textStyle9
-            restLabel.textColor = UIColor.black
-        }
-    }
-    
-    @IBOutlet weak var actionLabel: UILabel! {
-        didSet {
-            actionLabel.text = K.Names.startSeconds
-            actionLabel.textAlignment = .center
-            actionLabel.font  = UIFont.textStyle9
-            actionLabel.textColor = UIColor.black
-        }
-    }
-    @IBOutlet weak var labelForRounds: UILabel! {
-        didSet {
-            labelForRounds.text = K.Names.startRounds
-            labelForRounds.font = UIFont.textStyle9
-            labelForRounds.textColor = UIColor.black
-            labelForRounds.textAlignment = .center
-        }
-    }
-    
-    @IBOutlet weak var actionNameLabel: UILabel! {
-        didSet {
-            actionNameLabel.text = K.Names.action
-            actionNameLabel.font = UIFont.textStyle7
-            actionNameLabel.textColor = UIColor.white
-        }
-    }
-    
-    @IBOutlet weak var workoutRoundsView: UIView! {
-        didSet {
-            workoutRoundsView.backgroundColor = UIColor(patternImage: UIImage(named: K.Names.workoutRoundsView) ?? UIImage())
-        }
-    }
-    @IBOutlet weak var workoutNameView: UIView! {
-        didSet {
-            workoutNameView.backgroundColor = UIColor(patternImage: UIImage(named: K.Names.workoutNameView) ?? UIImage())
-        }
-    }
-    
-    @IBOutlet weak var labelName: UILabel! {
-        didSet {
-            labelName.text = K.Names.workoutName
-            labelName.font = UIFont.textStyle7
-            labelName.textColor = UIColor.white
-        }
-    }
-    
-    @IBAction func actionBtnColorPressed(_ sender: UIButton) {
-        handlerMoreAction(sender: sender.tag)
-    }
-    
-    @IBAction func restBtnColorPressed(_ sender: UIButton) {
-        handlerMoreAction(sender: sender.tag)
-    }
-    
+    @IBOutlet weak var restLabel: UILabel! 
+    @IBOutlet weak var actionLabel: UILabel!
+    @IBOutlet weak var labelForRounds: UILabel!
+    @IBOutlet weak var actionNameLabel: UILabel!
+    @IBOutlet weak var workoutRoundsView: UIView!
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var addActionButton: UIButton!
     @IBOutlet weak var saveBarButton: UIBarButtonItem! {
         didSet {
-            saveBarButton.title = K.Names.saveBtn
-            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
-            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
+            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .normal)
+            saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .highlighted)
         }
     }
         
-    @IBOutlet weak var addActionButton: UIButton! {
-        didSet {
-            addActionButton.setTitle(K.Names.titleBtn, for: .normal)
-            addActionButton.tintColor = UIColor.black
-            addActionButton.titleLabel?.font = UIFont.textStyle9
-        }
-    }
-    
     //MARK:- Init
     
     override func viewDidLoad() {
@@ -123,6 +59,14 @@ class AddActionViewController: UIViewController {
     }
     
     //MARK:- Setup Handlers
+    
+    @IBAction func actionBtnColorPressed(_ sender: UIButton) {
+        handlerMoreAction(sender: sender.tag)
+    }
+    
+    @IBAction func restBtnColorPressed(_ sender: UIButton) {
+        handlerMoreAction(sender: sender.tag)
+    }
     
     private func handlerMoreAction(sender tag: Int) {
         settingsLauncher.tag = tag
@@ -160,6 +104,7 @@ class AddActionViewController: UIViewController {
         if trainingNameTextField.text != "" && numberOfRounds != 0 && numberOfActionSeconds != 0 {
             saveAction()
             resetAction()
+            trainingNameTextField.endEditing(true)
         }
     }
     
@@ -195,6 +140,7 @@ class AddActionViewController: UIViewController {
         actionLabel.text = K.Names.startSeconds
         restLabel.text = K.Names.startSeconds
     }
+    
     //MARK: - Manipulate with seconds
     
     @IBAction func addOrReduceButtonPressed(_ sender: UIButton) {

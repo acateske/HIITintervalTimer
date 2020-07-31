@@ -21,10 +21,9 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor.black
-        tableView.rowHeight = 94.0
+        tableView.rowHeight = K.Dimension.rowHeight
         title = K.Names.settings
         tableView.tableFooterView = UIView()
-       // print(Realm.Configuration.defaultConfiguration.fileURL)
         loadSettingsData()
     }
     

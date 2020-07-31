@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.barStyle = .black
         title = K.Names.workouts
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.textStyle, NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30), NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
     @IBAction func addWorkOutButtonPressed(_ sender: Any) {

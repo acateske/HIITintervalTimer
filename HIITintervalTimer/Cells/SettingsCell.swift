@@ -22,12 +22,7 @@ class SettingsCell: UITableViewCell {
     private var didCheckWormUp = settings.wormUp
     private var didSoundOn = settings.sound
     
-    @IBOutlet weak var settingsLabel: UILabel! {
-        didSet {
-            settingsLabel.textColor = UIColor.white
-            settingsLabel.font = UIFont.textStyle7
-        }
-    }
+    @IBOutlet weak var settingsLabel: UILabel! 
     @IBOutlet weak var settingsButton: UIButton!
        
     //MARK:- Setup Handlers

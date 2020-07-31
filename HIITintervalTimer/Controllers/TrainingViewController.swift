@@ -13,7 +13,7 @@ import RealmSwift
 class TrainingViewController: UIViewController {
     
     //MARK:- Setup properties
-    
+
     var selectedTraining: Int?
     private let realm = try! Realm()
     private var player: AVAudioPlayer?
@@ -32,43 +32,14 @@ class TrainingViewController: UIViewController {
     private var colorForRest = ""
     private var colorForAction = ""
     
-    @IBOutlet weak var totalTimeLabel: UILabel! {
-        didSet {
-            totalTimeLabel.textAlignment = .center
-            totalTimeLabel.textColor = UIColor.white
-            totalTimeLabel.font = UIFont.textStyle
-            totalTimeLabel.text = K.Names.totalTimeLeft
-        }
-    }
-    
+    @IBOutlet weak var totalTimeLabel: UILabel!
+    @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var endTimerButton: UIButton!
+    @IBOutlet weak var numberOfRoundsLabel: UILabel!
+    @IBOutlet weak var workingTimeLabel: UILabel!
     @IBOutlet weak var startWorkingButton: UIButton! {
         didSet {
             startWorkingButton.setImage(UIImage(named: K.ImageNames.play), for: .normal)
-        }
-    }
-    
-    @IBOutlet weak var endTimerButton: UIButton! {
-        didSet {
-            endTimerButton.setTitle(K.Names.endTimerButton, for: .normal)
-            endTimerButton.titleLabel?.font = UIFont.textStyle
-            endTimerButton.tintColor = UIColor.white
-        }
-    }
-    
-    @IBOutlet weak var numberOfRoundsLabel: UILabel! {
-        didSet {
-            numberOfRoundsLabel.textColor = UIColor.white
-            numberOfRoundsLabel.textAlignment = .center
-            numberOfRoundsLabel.font = UIFont.textStyle
-            numberOfRoundsLabel.text = K.Names.countRound
-        }
-    }
-    
-    @IBOutlet weak var workingTimeLabel: UILabel! {
-        didSet {
-            workingTimeLabel.textAlignment = .center
-            workingTimeLabel.font = UIFont.textStyle10
-            workingTimeLabel.text = K.Names.startTime
         }
     }
     @IBOutlet weak var clapImageView: UIImageView! {
@@ -78,23 +49,13 @@ class TrainingViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var labelName: UILabel! {
-        didSet {
-            labelName.textAlignment = .center
-            labelName.textColor = UIColor.white
-            labelName.font = UIFont.textStyle2
-            labelName.text = K.Names.workout
-        }
-    }
-    
     //MARK: Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.black
+       
         updateView()
-        
+        view.backgroundColor = UIColor.black
          NotificationCenter.default.addObserver(self, selector: #selector(appResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
@@ -139,10 +100,6 @@ class TrainingViewController: UIViewController {
     
     //MARK:- Setup AVAudio player
     
-    let soundReady = K.Sounds.soundReady
-    let soundRest = K.Sounds.soundRest
-    let soundFinished = K.Sounds.soundFinished
-    
     private func playSound(with sound: String, extensionn: String = K.Sounds.soundExtension, soundOn: Bool) {
         if !soundOn {
             guard let url = Bundle.main.url(forResource: sound, withExtension: extensionn) else { return }
@@ -176,9 +133,9 @@ class TrainingViewController: UIViewController {
             wormUp = false
             timer2.invalidate()
             workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
-            playSound(with: soundReady, soundOn: soundOn)
+            playSound(with: K.Sounds.soundReady, soundOn: soundOn)
             runTimer()
-            startWorkingButton.setImage(UIImage(named: "union1"), for: .normal)
+            startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
             workingTimeLabel.textColor = UIColor(hexString: colorForAction)
             labelName.text = K.Names.workout
         } else {
@@ -198,7 +155,7 @@ class TrainingViewController: UIViewController {
                 round += 1
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
                 workingTimeLabel.textColor = UIColor(hexString: colorForAction)
-                playSound(with: soundReady, soundOn: soundOn)
+                playSound(with: K.Sounds.soundReady, soundOn: soundOn)
             } else if seconds > 1 {
                 seconds -= 1
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -213,7 +170,7 @@ class TrainingViewController: UIViewController {
                 labelName.text = K.Names.finished
                 labelName.textColor = UIColor.neonRed
                 workingTimeLabel.text = K.Names.startTime
-                playSound(with: soundFinished, soundOn: soundOn)
+                playSound(with: K.Sounds.soundFinished, soundOn: soundOn)
                 startWorkingButton.isEnabled = false
             }
         } else {
@@ -223,7 +180,7 @@ class TrainingViewController: UIViewController {
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
                 workingTimeLabel.textColor = UIColor(hexString: colorForRest)
                 labelName.text = K.Names.rest
-                playSound(with: soundRest, soundOn: soundOn)
+                playSound(with: K.Sounds.soundRest, soundOn: soundOn)
             } else if seconds <= 1 && rest == 0 && round != numberOfRounds {
                 seconds = action
                 workingTimeLabel.text = timeStringWorkingTime(time: TimeInterval(seconds))
@@ -256,11 +213,11 @@ class TrainingViewController: UIViewController {
     @IBAction func startWorkingPressed(_ sender: UIButton) {
         
         if sender.currentImage == UIImage(named: K.ImageNames.play) && !cool && !wormUp {
-            playSound(with: soundReady, soundOn: soundOn)
+            playSound(with: K.Sounds.soundReady, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
         } else if sender.currentImage == UIImage(named: K.ImageNames.play) && cool {
-            playSound(with: soundRest, soundOn: soundOn)
+            playSound(with: K.Sounds.soundRest, soundOn: soundOn)
             runTimer()
             startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
         } else if sender.currentImage == UIImage(named: K.ImageNames.start) && !wormUp  {

@@ -29,7 +29,7 @@ class SettingColorCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = K.Names.settingsLabel
-        label.font = UIFont.textStyle5
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     

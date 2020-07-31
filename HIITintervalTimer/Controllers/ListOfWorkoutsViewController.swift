@@ -18,9 +18,8 @@ class ListOfWorkoutsViewController: UIViewController {
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
         didSet {
-            doneBarButton.title = K.Names.done
-            doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .normal)
-            doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.textStyle5], for: .highlighted)
+            doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .normal)
+            doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .highlighted)
         }
     }
     @IBOutlet weak var tableView: UITableView! {
@@ -30,23 +29,15 @@ class ListOfWorkoutsViewController: UIViewController {
     }
     
     @IBAction func doneBarButton(_ sender: UIBarButtonItem) {
-         self.navigationController?.popViewController(animated: true)
-    }
-    
-    @IBOutlet weak var addWorkoutButton: UIButton! {
-        didSet {
-            addWorkoutButton.isEnabled = false
-            addWorkoutButton.isOpaque = true
-            addWorkoutButton.setTitle(K.Names.addWorkout, for: .normal)
-            addWorkoutButton.titleLabel?.font = UIFont.textStyle9
-            addWorkoutButton.tintColor = UIColor.black
-        }
+         
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     //MARK:- Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.black
         title = K.Names.workouts
         tableView.dataSource = self

@@ -19,19 +19,8 @@ class WorkoutwCell: UITableViewCell {
     
     var delegate: WorkoutCellDelegate?
     
-    @IBOutlet weak var trainingNameLabel: UILabel! {
-        didSet {
-            trainingNameLabel.textColor = UIColor.white
-            trainingNameLabel.font = UIFont.textStyle7
-        }
-    }
-    
-    @IBOutlet weak var totalTimeLabel: UILabel! {
-        didSet {
-            totalTimeLabel.textColor = UIColor.brownishGrey
-            totalTimeLabel.font = UIFont.textStyle6
-        }
-    }
+    @IBOutlet weak var trainingNameLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel! 
     
     //MARK:- WorkoutCellDelegate Methods
     

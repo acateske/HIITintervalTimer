@@ -14,26 +14,15 @@ struct K {
         static let workouts = "WORKOUTS"
         static let workout = "WORKOUT"
         static let cellID = "CellID"
-        static let done = "DONE"
-        static let totalTimeLeft = "Total Time Left: 00:00:00"
         static let settings = "Settings"
         static let settingsLabel = "Test"
         static let startSeconds = "0 SECONDS"
         static let startRounds = "0 ROUNDS"
-        static let action = "ACTION"
-        static let workoutName = "WORKOUT NAME"
-        static let saveBtn = "SAVE"
-        static let titleBtn = "ADD ACTION"
-        static let workoutRoundsView = "rectangle31"
-        static let workoutNameView = "rectangle7"
-        static let addWorkout = "ADD WORKOUT"
-        static let endTimerButton = "END"
         static let countRound = "ROUND 1/1"
         static let startTime = "00:00"
-        static let wormUp = "Worm up"
+        static let wormUp = "WORM UP"
         static let finished = "Finished"
-        static let rest = "Rest"
-        static let home = "Home"
+        static let rest = "REST"
     }
     
     struct ImageNames {
@@ -47,6 +36,7 @@ struct K {
     
     struct Dimension {
         static let cellHeight: CGFloat = 50
+        static let rowHeight: CGFloat = 94.0
     }
     
     struct Sounds {
