@@ -73,7 +73,7 @@ class TrainingViewController: UIViewController {
             numberOfRounds = workout.numberOfRounds
             numberOfRoundsLabel.text = "ROUND 1/\(numberOfRounds)"
             totalTime = workout.totalTime
-            totalTimeLabel.text = CalculateManager.calculateTotalTime(time: totalTime)
+            totalTimeLabel.text = "Total Time Left: \(CalculateManager.calculateTotalTime(time: totalTime))"
             action = workout.actionSeconds
             rest = workout.restSeconds
             colorForAction = workout.colorAction
@@ -120,7 +120,7 @@ class TrainingViewController: UIViewController {
             workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
             PlaySound.play(with: K.Sounds.soundReady, soundOn: soundOn)
             runActionTimer()
-            startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
+            startWorkingButton.setImage(UIImage(named: K.ImageNames.pause), for: .normal)
             workingTimeLabel.textColor = UIColor(hexString: colorForAction)
             labelName.text = K.Names.workout
         } else {
@@ -131,7 +131,7 @@ class TrainingViewController: UIViewController {
     
     private func timerWorking() {
         if cool {
-            if seconds <= 1 && round != numberOfRounds && action > 0 {
+            if seconds <= 1 && round != numberOfRounds {
                 cool = false
                 seconds = action
                 workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
@@ -144,14 +144,6 @@ class TrainingViewController: UIViewController {
             } else if seconds > 1 {
                 seconds -= 1
                 workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
-            } else if seconds <= 1 && round == numberOfRounds {
-                numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
-                clapImageView.isHidden = false
-                labelName.text = K.Names.finished
-                labelName.textColor = UIColor.neonRed
-                workingTimeLabel.text = K.Names.startTime
-                PlaySound.play(with: K.Sounds.soundFinished, soundOn: soundOn)
-                startWorkingButton.isEnabled = false
             }
         } else {
             if seconds <= 1 && rest > 0{
@@ -166,14 +158,7 @@ class TrainingViewController: UIViewController {
                 workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
                 round += 1
                 numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
-            } else if seconds <= 1 && rest == 0 && round == numberOfRounds {
-                numberOfRoundsLabel.text = "ROUND \(round)/\(numberOfRounds)"
-                workingTimeLabel.text = K.Names.startTime
-                workingTimeLabel.textColor = UIColor(hexString: colorForRest)
-                labelName.text = K.Names.finished
-                clapImageView.isHidden = false
-                labelName.textColor = UIColor.neonRed
-            } else {
+            } else if seconds > 1 {
                 seconds -= 1
                 workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
                 workingTimeLabel.textColor = UIColor(hexString: colorForAction)
@@ -182,31 +167,33 @@ class TrainingViewController: UIViewController {
     }
     
     private func timerTotalTime() {
-        if totalTime < 1 {
+        if totalTime <= 1 {
             actionTimer.invalidate()
+            clapImageView.isHidden = false
+            labelName.text = K.Names.finished
+            labelName.textColor = UIColor.neonRed
+            workingTimeLabel.text = K.Names.startTime
+            PlaySound.play(with: K.Sounds.soundFinished, soundOn: soundOn)
+            startWorkingButton.isEnabled = false
+            totalTimeLabel.text = K.Names.totalTime
         } else {
             totalTime -= 1
-            totalTimeLabel.text = CalculateManager.calculateTotalTime(time: totalTime)
+            totalTimeLabel.text = "Total Time Left: \(CalculateManager.calculateTotalTime(time: totalTime))"
         }
     }
     
     @IBAction func startWorkingPressed(_ sender: UIButton) {
         
-        if sender.currentImage == UIImage(named: K.ImageNames.play) && !cool && !wormUp {
-            PlaySound.play(with: K.Sounds.soundReady, soundOn: soundOn)
+        if sender.currentImage == UIImage(named: K.ImageNames.play) && !wormUp {
             runActionTimer()
-            startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
-        } else if sender.currentImage == UIImage(named: K.ImageNames.play) && cool {
-            PlaySound.play(with: K.Sounds.soundRest, soundOn: soundOn)
-            runActionTimer()
-            startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
-        } else if sender.currentImage == UIImage(named: K.ImageNames.start) && !wormUp  {
+            startWorkingButton.setImage(UIImage(named: K.ImageNames.pause), for: .normal)
+        } else if sender.currentImage == UIImage(named: K.ImageNames.pause) && !wormUp  {
             actionTimer.invalidate()
             startWorkingButton.setImage(UIImage(named: K.ImageNames.play), for: .normal)
-        } else if sender.currentImage == UIImage(named: K.ImageNames.play) && !cool && wormUp {
+        } else if sender.currentImage == UIImage(named: K.ImageNames.play) && wormUp {
             runPrepareTimer()
-            startWorkingButton.setImage(UIImage(named: K.ImageNames.start), for: .normal)
-        } else if sender.currentImage == UIImage(named: K.ImageNames.start) && !cool && wormUp {
+            startWorkingButton.setImage(UIImage(named: K.ImageNames.pause), for: .normal)
+        } else if sender.currentImage == UIImage(named: K.ImageNames.pause) && wormUp {
             prepareTimer.invalidate()
             startWorkingButton.setImage(UIImage(named: K.ImageNames.play), for: .normal)
         }
@@ -219,7 +206,7 @@ class TrainingViewController: UIViewController {
         seconds = 0
         workingTimeLabel.text = CalculateManager.calculateWorkingTime(time: TimeInterval(seconds))
         totalTime = 0
-        totalTimeLabel.text = CalculateManager.calculateTotalTime(time: totalTime)
+        totalTimeLabel.text = "Total Time Left: \(CalculateManager.calculateTotalTime(time: totalTime))"
         labelName.text = K.Names.workout
         labelName.textColor = UIColor.white
         clapImageView.isHidden = true

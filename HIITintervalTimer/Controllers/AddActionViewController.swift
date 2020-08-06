@@ -38,7 +38,6 @@ class AddActionViewController: UIViewController {
     @IBOutlet weak var actionNameLabel: UILabel!
     @IBOutlet weak var workoutRoundsView: UIView!
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var addActionButton: UIButton!
     @IBOutlet weak var saveBarButton: UIBarButtonItem! {
         didSet {
             saveBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .normal)
@@ -51,6 +50,7 @@ class AddActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.setHidesBackButton(true, animated: true)
         view.backgroundColor = UIColor.black
         title = K.Names.workouts
         trainingNameTextField.delegate = self
@@ -92,6 +92,15 @@ class AddActionViewController: UIViewController {
             }
         }
     }
+    @IBAction func workoutsButtonPressed(_ sender: UIButton) {
+        if editTraining != nil {
+            let alert = UIAlertController(title: "Save Training Firts!", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        } else {
+            performSegue(withIdentifier: K.Seque.listOfWorkoutsVC, sender: self)
+        }
+    }
     
     //MARK: - SaveData Methods
     
@@ -119,6 +128,7 @@ class AddActionViewController: UIViewController {
         } catch {
             print("Error saving workouts!, \(error)")
         }
+        editTraining = nil
     }
     
     private func resetAction() {

@@ -10,23 +10,21 @@
 		6C0D5C852229E5AC0037C491 /* ListOfWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0D5C842229E5AC0037C491 /* ListOfWorkoutsViewController.swift */; };
 		6C0D5C872229ED390037C491 /* WorkoutwCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0D5C862229ED390037C491 /* WorkoutwCell.swift */; };
 		6C0F8B322235AFAF0083F98E /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0F8B312235AFAF0083F98E /* TrainingViewController.swift */; };
-		6C112393222B28F8003FF910 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C112392222B28F8003FF910 /* Workout.swift */; };
 		6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */; };
 		6C50BAB224DB687C00BE2C59 /* SaveSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50BAB124DB687C00BE2C59 /* SaveSettingsManager.swift */; };
+		6C5678CF24DCA9A200441369 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5678CE24DCA9A200441369 /* DataModel.swift */; };
 		6C5883712454DE2700A46411 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5883702454DE2700A46411 /* K.swift */; };
 		6C73DF4424D8B56C00ACF93D /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C73DF4324D8B56C00ACF93D /* Calculate.swift */; };
 		6C73DF4624D9B6FD00ACF93D /* PlaySound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C73DF4524D9B6FD00ACF93D /* PlaySound.swift */; };
 		6C8F90112252C5AD001C5ABB /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8F90102252C5AD001C5ABB /* SettingsCell.swift */; };
 		6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905530224FCCA9003324CA /* MenuViewController.swift */; };
 		6C905535224FE844003324CA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C905534224FE844003324CA /* SettingsTableViewController.swift */; };
-		6C9288652254138C001463BE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9288642254138C001463BE /* Settings.swift */; };
 		6C98F27722569AF200BE59F1 /* beep-29.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27622569AF200BE59F1 /* beep-29.wav */; };
 		6C98F27922569B0B00BE59F1 /* beep-30b.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27822569B0B00BE59F1 /* beep-30b.wav */; };
 		6C98F27B2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */; };
 		6C98F27D2256AFB100BE59F1 /* 451270__alivvie__ready.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */; };
 		6C98F27F2256B22F00BE59F1 /* 34943__sir-yaro__finished.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */; };
 		6C9ABE3722C29B9100409189 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9ABE3622C29B9100409189 /* SettingsLauncher.swift */; };
-		6C9ABE3922C2A5E200409189 /* SettingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9ABE3822C2A5E200409189 /* SettingColor.swift */; };
 		6C9ABE3B22C2A96F00409189 /* SettingsColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9ABE3A22C2A96F00409189 /* SettingsColorCell.swift */; };
 		6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */; };
 		6CB6BCBF221C7B6900C6EE34 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB6BCBE221C7B6900C6EE34 /* HomeViewController.swift */; };
@@ -42,23 +40,21 @@
 		6C0D5C842229E5AC0037C491 /* ListOfWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfWorkoutsViewController.swift; sourceTree = "<group>"; };
 		6C0D5C862229ED390037C491 /* WorkoutwCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutwCell.swift; sourceTree = "<group>"; };
 		6C0F8B312235AFAF0083F98E /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
-		6C112392222B28F8003FF910 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		6C12F9CC2227222100AC6D8C /* AddActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionViewController.swift; sourceTree = "<group>"; };
 		6C50BAB124DB687C00BE2C59 /* SaveSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSettingsManager.swift; sourceTree = "<group>"; };
+		6C5678CE24DCA9A200441369 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		6C5883702454DE2700A46411 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		6C73DF4324D8B56C00ACF93D /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		6C73DF4524D9B6FD00ACF93D /* PlaySound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySound.swift; sourceTree = "<group>"; };
 		6C8F90102252C5AD001C5ABB /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		6C905530224FCCA9003324CA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6C905534224FE844003324CA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		6C9288642254138C001463BE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		6C98F27622569AF200BE59F1 /* beep-29.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-29.wav"; sourceTree = "<group>"; };
 		6C98F27822569B0B00BE59F1 /* beep-30b.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "beep-30b.wav"; sourceTree = "<group>"; };
 		6C98F27A2256AFA800BE59F1 /* 108889__tim-kahn__rest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "108889__tim-kahn__rest.wav"; sourceTree = "<group>"; };
 		6C98F27C2256AFB100BE59F1 /* 451270__alivvie__ready.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 451270__alivvie__ready.wav; sourceTree = "<group>"; };
 		6C98F27E2256B22E00BE59F1 /* 34943__sir-yaro__finished.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "34943__sir-yaro__finished.wav"; sourceTree = "<group>"; };
 		6C9ABE3622C29B9100409189 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
-		6C9ABE3822C2A5E200409189 /* SettingColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingColor.swift; sourceTree = "<group>"; };
 		6C9ABE3A22C2A96F00409189 /* SettingsColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorCell.swift; sourceTree = "<group>"; };
 		6CB6BCB9221C7B6900C6EE34 /* HIITintervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITintervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CB6BCBC221C7B6900C6EE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,9 +132,7 @@
 		6C1091E72223417D00273BA3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6C112392222B28F8003FF910 /* Workout.swift */,
-				6C9288642254138C001463BE /* Settings.swift */,
-				6C9ABE3822C2A5E200409189 /* SettingColor.swift */,
+				6C5678CE24DCA9A200441369 /* DataModel.swift */,
 				6C73DF4324D8B56C00ACF93D /* Calculate.swift */,
 				6C73DF4524D9B6FD00ACF93D /* PlaySound.swift */,
 				6C50BAB124DB687C00BE2C59 /* SaveSettingsManager.swift */,
@@ -328,17 +322,15 @@
 				6C50BAB224DB687C00BE2C59 /* SaveSettingsManager.swift in Sources */,
 				6C905531224FCCA9003324CA /* MenuViewController.swift in Sources */,
 				6C5883712454DE2700A46411 /* K.swift in Sources */,
+				6C5678CF24DCA9A200441369 /* DataModel.swift in Sources */,
 				6C0F8B322235AFAF0083F98E /* TrainingViewController.swift in Sources */,
 				6C8F90112252C5AD001C5ABB /* SettingsCell.swift in Sources */,
 				6C9ABE3B22C2A96F00409189 /* SettingsColorCell.swift in Sources */,
 				6CB6BCBF221C7B6900C6EE34 /* HomeViewController.swift in Sources */,
-				6C9288652254138C001463BE /* Settings.swift in Sources */,
 				6C905535224FE844003324CA /* SettingsTableViewController.swift in Sources */,
 				6C0D5C852229E5AC0037C491 /* ListOfWorkoutsViewController.swift in Sources */,
 				6CEEAA6D221C8D0F0025978C /* UIColor+Additions.swift in Sources */,
-				6C112393222B28F8003FF910 /* Workout.swift in Sources */,
 				6C12F9CD2227222200AC6D8C /* AddActionViewController.swift in Sources */,
-				6C9ABE3922C2A5E200409189 /* SettingColor.swift in Sources */,
 				6C9ABE3722C29B9100409189 /* SettingsLauncher.swift in Sources */,
 				6C0D5C872229ED390037C491 /* WorkoutwCell.swift in Sources */,
 				6CB6BCBD221C7B6900C6EE34 /* AppDelegate.swift in Sources */,

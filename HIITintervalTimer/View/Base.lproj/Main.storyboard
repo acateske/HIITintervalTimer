@@ -86,11 +86,11 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ack-BW-zP5" kind="show" id="ySK-vx-v7a"/>
+                                    <action selector="workoutsButtonPressed:" destination="qAG-Du-1US" eventType="touchUpInside" id="EVh-tR-qtI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WORKOUT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXY-iu-ERC">
-                                <rect key="frame" x="20" y="79.5" width="148" height="27"/>
+                                <rect key="frame" x="20" y="23.5" width="148" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="4fD-1A-NCd"/>
                                 </constraints>
@@ -99,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKA-4z-ac9">
-                                <rect key="frame" x="20" y="184.5" width="374" height="42"/>
+                                <rect key="frame" x="20" y="128.5" width="374" height="42"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEn-NZ-stg">
                                         <rect key="frame" x="331" y="0.0" width="43" height="42"/>
@@ -144,7 +144,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGy-VY-oat">
-                                <rect key="frame" x="20" y="284.5" width="374" height="42"/>
+                                <rect key="frame" x="20" y="228.5" width="374" height="42"/>
                                 <subviews>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXk-qC-BmK">
                                         <rect key="frame" x="43" y="0.0" width="43" height="42"/>
@@ -202,7 +202,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqI-xj-kRM">
-                                <rect key="frame" x="20" y="250.5" width="81" height="27"/>
+                                <rect key="frame" x="20" y="194.5" width="81" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="pNW-DC-8fA"/>
                                 </constraints>
@@ -211,7 +211,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5t-lp-fHJ">
-                                <rect key="frame" x="20" y="354.5" width="374" height="42"/>
+                                <rect key="frame" x="20" y="298.5" width="374" height="42"/>
                                 <subviews>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1E-ed-qVd">
                                         <rect key="frame" x="43" y="0.0" width="43" height="42"/>
@@ -269,7 +269,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Name For Workout" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-6d-LjA">
-                                <rect key="frame" x="20" y="126.5" width="374" height="38"/>
+                                <rect key="frame" x="20" y="70.5" width="374" height="38"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
@@ -311,7 +311,6 @@
                         <outlet property="actionBtnColor" destination="rqM-yc-g8J" id="GKj-FN-ve0"/>
                         <outlet property="actionLabel" destination="4rw-0z-Lr9" id="c0D-f3-Ks9"/>
                         <outlet property="actionNameLabel" destination="aqI-xj-kRM" id="3mz-uR-I44"/>
-                        <outlet property="addActionButton" destination="Jp8-ZC-JWd" id="vTY-nz-odd"/>
                         <outlet property="addActionSecondsBtn" destination="HiC-4i-Hvt" id="xIV-5T-lJe"/>
                         <outlet property="addRestSecondsBtn" destination="9QM-F4-JYW" id="DST-9c-qGj"/>
                         <outlet property="addRoundsBtn" destination="wEn-NZ-stg" id="jig-rz-RhH"/>
@@ -325,11 +324,12 @@
                         <outlet property="saveBarButton" destination="bZN-Ru-7uw" id="GXe-ar-ZcN"/>
                         <outlet property="trainingNameTextField" destination="rcP-6d-LjA" id="fj6-SJ-xAy"/>
                         <outlet property="workoutRoundsView" destination="qKA-4z-ac9" id="B3N-sO-02z"/>
+                        <segue destination="ack-BW-zP5" kind="show" identifier="goToListOfWorkoutsVC" id="Bci-zl-c4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fD-hX-zIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910.144927536232" y="132.58928571428572"/>
+            <point key="canvasLocation" x="1809" y="124"/>
         </scene>
         <!--List Of Workouts View Controller-->
         <scene sceneID="UZE-p6-KLF">
@@ -340,7 +340,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pvZ-gI-6nK">
-                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="workoutCell" rowHeight="109" id="dE6-0T-O9O" customClass="WorkoutwCell" customModule="HIITintervalTimer">
@@ -454,8 +454,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WORKOUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbd-Zz-xB7">
-                                <rect key="frame" x="106.5" y="214" width="201" height="51"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbd-Zz-xB7">
+                                <rect key="frame" x="177.5" y="214" width="59.5" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="51" id="GmN-JE-Og5"/>
                                 </constraints>
@@ -522,7 +522,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3R-LU-jXf">
-                                <rect key="frame" x="59.5" y="224.5" width="38.5" height="38.5"/>
+                                <rect key="frame" x="130.5" y="224.5" width="38.5" height="38.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38.399999999999999" id="8Wg-lA-W1c"/>
                                     <constraint firstAttribute="height" constant="38.399999999999999" id="B1C-97-mQJ"/>
@@ -793,8 +793,8 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g76-1v-PS3"/>
-        <segue reference="Xlw-4n-IB6"/>
+        <segue reference="clU-pf-fzW"/>
+        <segue reference="Bci-zl-c4l"/>
         <segue reference="QF0-8z-buW"/>
         <segue reference="V85-8Z-cUw"/>
     </inferredMetricsTieBreakers>

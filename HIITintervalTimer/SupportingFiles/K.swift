@@ -12,7 +12,7 @@ struct K {
     
     struct Names {
         static let workouts = "WORKOUTS"
-        static let workout = "WORKOUT"
+        static let workout = "GO"
         static let cellID = "CellID"
         static let settings = "Settings"
         static let startSeconds = "0 SECONDS"
@@ -20,14 +20,15 @@ struct K {
         static let countRound = "ROUND 1/1"
         static let startTime = "00:00"
         static let wormUp = "WORM UP"
-        static let finished = "Finished"
+        static let finished = "FINISHED"
         static let rest = "REST"
+        static let totalTime = "Total Time Left: 00:00:00"
     }
     
     struct ImageNames {
         static let play = "mediaPlaySymbol"
         static let clapHands = "clap"
-        static let start = "union1"
+        static let pause = "union1"
         static let check = "check"
         static let yellowView = "rectangle65"
         static let blackView = "rectangle68"
