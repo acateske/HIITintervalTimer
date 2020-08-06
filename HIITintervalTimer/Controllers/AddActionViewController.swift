@@ -13,8 +13,7 @@ class AddActionViewController: UIViewController {
 
     //MARK: - Setup properties
 
-    var recivedRow: Int?
-    private var timer: Timer?
+    var editTraining: Workout?
     private let realm = try! Realm()
     private var colorForActionBtn = UIColor.neonYellow
     private var colorForRestBtn = UIColor.neonRed
@@ -62,10 +61,7 @@ class AddActionViewController: UIViewController {
     
     @IBAction func actionBtnColorPressed(_ sender: UIButton) {
         handlerMoreAction(sender: sender.tag)
-    }
-    
-    @IBAction func restBtnColorPressed(_ sender: UIButton) {
-        handlerMoreAction(sender: sender.tag)
+        trainingNameTextField.endEditing(true)
     }
     
     private func handlerMoreAction(sender tag: Int) {
@@ -75,8 +71,7 @@ class AddActionViewController: UIViewController {
     }
     
     private func updateView() {
-        if recivedRow != nil {
-            let workout = workoutTrainings![recivedRow!]
+        if let workout = editTraining {
             numberOfRounds = workout.numberOfRounds
             labelForRounds.text = "\(numberOfRounds) ROUNDS"
             trainingNameTextField.text = workout.nameOfTraining
@@ -193,13 +188,15 @@ extension AddActionViewController: UITextFieldDelegate {
 
 extension AddActionViewController: SettingsLauncherDelegate {
     
-    func changeColorAction(_ settingsLauncher: SettingsLauncher, with color: UIColor) {
-        colorForActionBtn = color
-        actionBtnColor.backgroundColor = colorForActionBtn
-    }
-    
-    func changeColorRest(_ settingsLauncher: SettingsLauncher, with color: UIColor) {
-        colorForRestBtn = color
-        restBtnColor.backgroundColor = colorForRestBtn
+    func changeColor(_ settingsLauncher: SettingsLauncher, with color: UIColor) {
+        if let buttonTag = settingsLauncher.tag {
+            if buttonTag == 1 {
+                colorForActionBtn = color
+                actionBtnColor.backgroundColor = color
+            } else {
+                colorForRestBtn = color
+                restBtnColor.backgroundColor = color
+            }
+        }
     }
 }

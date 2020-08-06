@@ -28,7 +28,6 @@ class SettingColorCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = K.Names.settingsLabel
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
@@ -38,7 +37,6 @@ class SettingColorCell: UICollectionViewCell {
         if let window = UIApplication.shared.keyWindow {
             view.frame = CGRect(x: window.frame.width - 50, y: 10, width: 30, height: 30)
             view.layer.cornerRadius = 15
-            view.backgroundColor = UIColor.spearmint
             view.clipsToBounds = true
         }
         return view

@@ -13,8 +13,9 @@ class ListOfWorkoutsViewController: UIViewController {
     
     //MARK:- Setup properties
 
-    private let realm = try! Realm()
+    private var workoutTrainings: Results<Workout>?
     private var selectedRow: Int?
+    private let realm = try! Realm()
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem! {
         didSet {
@@ -22,16 +23,7 @@ class ListOfWorkoutsViewController: UIViewController {
             doneBarButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], for: .highlighted)
         }
     }
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.backgroundColor = UIColor.black
-        }
-    }
-    
-    @IBAction func doneBarButton(_ sender: UIBarButtonItem) {
-         
-        self.navigationController?.popToRootViewController(animated: true)
-    }
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK:- Init
     
@@ -43,14 +35,14 @@ class ListOfWorkoutsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 109.0
-        load()
-        
-        if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
-            settings = settingsData
-        } else {
-            print("Not save data yet!!!")
-        }
+        tableView.backgroundColor = UIColor.black
+        loadWorkouts()
+        loadSettingsSetUp()
     }
+    
+    @IBAction func doneBarButton(_ sender: UIBarButtonItem) {
+           self.navigationController?.popToRootViewController(animated: true)
+       }
 }
 
 //MARK:- UITableViewDataSource
@@ -62,28 +54,28 @@ extension ListOfWorkoutsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellIdentifier.listOfWorkoutVcCell, for: indexPath) as! WorkoutwCell
-        cell.backgroundColor = UIColor.black
-        cell.selectionStyle = .none
         cell.delegate = self
         if let workout = workoutTrainings?[indexPath.row] {
-            cell.trainingNameLabel.text = workout.nameOfTraining
-            let timeInterval = workout.totalTime
-            let seconds = lroundf(Float(timeInterval))
-            let hour = seconds / 3600
-            let min = (seconds % 3600) / 60
-            let sec = seconds % 60
-            let workingTime = String(format: "%02d", hour) + ":" + String(format: "%02d", min) + ":" + String(format: "%02d", sec)
-            cell.totalTimeLabel.text = "TOTAL TIME" + " " + workingTime
+            cell.workout = workout
         }
         return cell
     }
     
     //MARK: Setup handler for load data
     
-    func load() {
+    func loadWorkouts() {
         workoutTrainings = realm.objects(Workout.self)
         tableView.reloadData()
+    }
+    
+    func loadSettingsSetUp() {
+        if let settingsData = realm.object(ofType: Settings.self, forPrimaryKey: 0) {
+            settings = settingsData
+        } else {
+            print("Not save data yet!!!")
+        }
     }
 }
 
@@ -99,12 +91,14 @@ extension ListOfWorkoutsViewController: UITableViewDelegate {
         if segue.identifier == K.Seque.trainingVC {
             if let trainingVC = segue.destination as? TrainingViewController {
                 if let indexPath = tableView.indexPathForSelectedRow {
-                    trainingVC.selectedTraining = indexPath.row
+                    trainingVC.selectedTraining = workoutTrainings?[indexPath.row]
                 }
             }
         } else if segue.identifier == K.Seque.addActionVC {
             if let actionVC = segue.destination as? AddActionViewController {
-                actionVC.recivedRow = selectedRow
+                if let row = selectedRow {
+                    actionVC.editTraining = workoutTrainings?[row]
+                }
             }
         }
     }

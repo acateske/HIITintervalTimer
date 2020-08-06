@@ -24,3 +24,5 @@ class Settings: Object {
 
 var settings = Settings()
 
+
+

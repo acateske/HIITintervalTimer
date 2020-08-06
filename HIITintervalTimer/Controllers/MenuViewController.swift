@@ -23,14 +23,7 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.black
-        SideMenuManager.defaultManager.menuWidth = view.frame.width/1.3
-        setUpNavigationBar()
-    }
-    
-    private func setUpNavigationBar() {
+        SideMenuManager.default.menuAnimationFadeStrength = 1
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.barTintColor = .black
-        navigationController?.navigationBar.barStyle = .black
     }
 }

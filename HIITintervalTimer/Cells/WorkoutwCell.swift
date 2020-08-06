@@ -15,14 +15,28 @@ protocol WorkoutCellDelegate {
 
 class WorkoutwCell: UITableViewCell {
     
-    //MARK:- Setup Properties
+    //MARK: - Properties
     
     var delegate: WorkoutCellDelegate?
+    var workout: Workout? {
+        didSet {
+            trainingNameLabel.text = workout?.nameOfTraining
+            if let time = workout?.totalTime {
+                totalTimeLabel.text = CalculateManager.calculateTotalTime(time: time)
+            }
+        }
+    }
     
     @IBOutlet weak var trainingNameLabel: UILabel!
     @IBOutlet weak var totalTimeLabel: UILabel! 
     
-    //MARK:- WorkoutCellDelegate Methods
+    override func awakeFromNib() {
+           super.awakeFromNib()
+           
+           selectionStyle = .none
+           backgroundColor = .black
+       }
+    //MARK: - Methods
     
     @IBAction func editTrainingButton(_ sender: Any) {
         delegate?.editButtonPressed(cell: self)
@@ -32,3 +46,5 @@ class WorkoutwCell: UITableViewCell {
         delegate?.deleteButtonPressed(cell: self)
     }
 }
+
+

@@ -15,7 +15,6 @@ struct K {
         static let workout = "WORKOUT"
         static let cellID = "CellID"
         static let settings = "Settings"
-        static let settingsLabel = "Test"
         static let startSeconds = "0 SECONDS"
         static let startRounds = "0 ROUNDS"
         static let countRound = "ROUND 1/1"

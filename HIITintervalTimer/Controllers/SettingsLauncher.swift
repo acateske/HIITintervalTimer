@@ -9,8 +9,7 @@
 import UIKit
 
 protocol SettingsLauncherDelegate {
-    func changeColorAction(_ settingsLauncher: SettingsLauncher, with color: UIColor)
-    func changeColorRest(_ settingsLauncher: SettingsLauncher, with color: UIColor)
+    func changeColor(_ settingsLauncher: SettingsLauncher, with color: UIColor)
 }
 
 class SettingsLauncher: NSObject {
@@ -115,9 +114,9 @@ extension SettingsLauncher: UICollectionViewDelegate, UICollectionViewDelegateFl
         }) { (completed: Bool) in
             let selectedColor = self.settingColors[indexPath.item].color
             if self.tag == 1 {
-                self.delegate?.changeColorAction(self, with: selectedColor)
+                self.delegate?.changeColor(self, with: selectedColor)
             } else if self.tag == 2 {
-                self.delegate?.changeColorRest(self, with: selectedColor)
+                self.delegate?.changeColor(self, with: selectedColor)
             }
         }
     }

@@ -21,5 +21,3 @@ class Workout: Object {
     @objc dynamic var colorRest = ""
 }
 
-var workoutTrainings: Results<Workout>?
-
